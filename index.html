@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Сумма технологий — семинар об ИИ, Санкт-Петербург, 24–25 октября</title>
+<style>
+:root{
+  --bg:#0a1120; --panel:#101a30; --text:#e6edf7; --muted:#9fb0c7;
+  --accent:#2dd4ea; --gold:#f0b429; --border:rgba(255,255,255,.08);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'Segoe UI',system-ui,-apple-system,sans-serif;background:var(--bg);color:var(--text);line-height:1.6}
+.container{max-width:1040px;margin:0 auto;padding:0 20px}
+.nav{position:sticky;top:0;z-index:10;background:rgba(10,17,32,.92);backdrop-filter:blur(8px);border-bottom:1px solid var(--border)}
+.nav .container{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:14px 20px;flex-wrap:wrap}
+.nav-logo{color:var(--gold);font-weight:700;text-decoration:none;font-size:17px;white-space:nowrap}
+.nav-links{display:flex;gap:22px;flex-wrap:wrap;align-items:center}
+.nav-links a{color:var(--muted);text-decoration:none;font-size:14px;transition:color .15s}
+.nav-links a:hover{color:var(--accent)}
+.nav .btn{padding:9px 18px;font-size:14px}
+header.hero{
+  padding:96px 0 90px;text-align:center;
+  background:
+    radial-gradient(700px 340px at 82% 12%, rgba(45,212,234,.16), transparent),
+    radial-gradient(560px 320px at 12% 85%, rgba(59,130,246,.14), transparent),
+    var(--bg);
+}
+.eyebrow{letter-spacing:.22em;text-transform:uppercase;color:var(--accent);font-size:13px;margin-bottom:18px}
+h1{font-size:clamp(42px,7vw,76px);color:var(--gold);font-weight:700;line-height:1.05;margin-bottom:16px}
+.tagline{font-size:clamp(17px,2.4vw,22px);color:var(--accent);margin-bottom:18px;font-weight:600}
+.lead{max-width:640px;margin:0 auto 34px;color:var(--muted);font-size:17px}
+.btn{display:inline-block;padding:15px 34px;border-radius:10px;font-weight:700;font-size:16px;text-decoration:none;cursor:pointer;border:none;transition:transform .15s ease, box-shadow .15s ease}
+.btn-primary{background:linear-gradient(90deg,var(--accent),#3b82f6);color:#041018;box-shadow:0 6px 24px rgba(45,212,234,.25)}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 10px 30px rgba(45,212,234,.35)}
+section{padding:70px 0}
+h2{color:var(--gold);font-size:clamp(26px,4vw,34px);margin-bottom:14px}
+.section-sub{color:var(--muted);max-width:720px;margin-bottom:30px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px}
+.card{background:var(--panel);border:1px solid var(--border);border-radius:14px;padding:24px}
+.card h3{color:var(--accent);font-size:18px;margin-bottom:10px}
+.card p{color:var(--muted);font-size:15px}
+.card .amount{font-size:30px;color:var(--gold);font-weight:700;margin:6px 0}
+.card .note{font-size:13px;color:var(--muted)}
+ul.plain{list-style:none}
+ul.plain li{padding:8px 0 8px 26px;position:relative;color:var(--muted)}
+ul.plain li::before{content:"▸";color:var(--accent);position:absolute;left:4px}
+#register{background:linear-gradient(180deg,transparent,rgba(45,212,234,.05))}
+form{max-width:520px;margin:0 auto;background:var(--panel);border:1px solid var(--border);border-radius:16px;padding:30px}
+.field{margin-bottom:16px;text-align:left}
+.field label{display:block;font-size:14px;color:var(--muted);margin-bottom:6px}
+.field input,.field select{width:100%;padding:13px 14px;border-radius:10px;border:1px solid var(--border);background:#0d1526;color:var(--text);font-size:15px;outline:none}
+.field input:focus,.field select:focus{border-color:var(--accent)}
+form .btn{width:100%}
+.success{display:none;max-width:520px;margin:0 auto;text-align:center;background:var(--panel);border:1px solid var(--accent);border-radius:16px;padding:40px 30px}
+.success h3{color:var(--accent);margin-bottom:10px}
+footer{padding:36px 0;border-top:1px solid var(--border);color:var(--muted);text-align:center;font-size:14px}
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="container">
+    <a class="nav-logo" href="#top">Сумма технологий</a>
+    <div class="nav-links">
+      <a href="#about">Идея</a>
+      <a href="#sections">Секции</a>
+      <a href="#program">Программа и билеты</a>
+      <a href="#format">Формат</a>
+      <a href="#register">Регистрация</a>
+    </div>
+    <a href="#register" class="btn btn-primary">Участвовать</a>
+  </div>
+</nav>
+
+<header class="hero" id="top">
+  <div class="container">
+    <p class="eyebrow">Санкт-Петербург · 24–25 октября</p>
+    <h1>Сумма технологии</h1>
+    <p class="tagline">Четыре грани ИИ: наука, практика, творчество, прогноз</p>
+    <p class="lead">Двухдневный семинар системного разговора об искусственном интеллекте: от научной базы и практических навыков до образования и футурологии. Академично, практично, без конспирологии.</p>
+  </div>
+</header>
+
+<section id="about">
+  <div class="container">
+    <h2>Идея семинара</h2>
+    <p class="section-sub">Название — отсылка к трактату Станислава Лема «Summa Technologiae» (1964): там, где средневековый схоласт систематизировал божественное, Лем систематизирует технологическое. Семинар продолжает эту рамку: ИИ — не «гаджет», а следующий шаг логики развития сложных систем. Мы разбираем, где заканчивается наука и технология и начинается магия маркетинга, и обсуждаем модели будущего, состоятельность которых можно проверять.</p>
+  </div>
+</section>
+
+<section id="sections">
+  <div class="container">
+    <h2>Четыре секции</h2>
+    <div class="grid">
+      <div class="card">
+        <h3>1. Научно-техническая база ИИ</h3>
+        <p>Архитектуры трансформеров, принципы обучения, эмбеддинги, attention, ограничения моделей. Разговор на языке инженеров и исследователей.</p>
+      </div>
+      <div class="card">
+        <h3>2. Практическая лаборатория личного ИИ</h3>
+        <p>Запуск локальных моделей (Llama, Mistral, Qwen), приватные ассистенты, автоматизация задач. Только рабочие инструменты.</p>
+      </div>
+      <div class="card">
+        <h3>3. ИИ в образовании, творчестве и профессиях</h3>
+        <p>Реальные кейсы из школ, вузов, студий и офисов: где нейросеть усиливает человека, а где подменяет.</p>
+      </div>
+      <div class="card">
+        <h3>4. Футурология, история, этика, риски</h3>
+        <p>От «Голема» и «Франкенштейна» до корпоративных войн за AGI: сингулярность, безработица, цензура, автономные агенты. Академично, без «инопланетян».</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="program">
+  <div class="container">
+    <h2>Программа и билеты</h2>
+    <div class="grid">
+      <div class="card">
+        <h3>День 1 · 24 октября</h3>
+        <p>Секции 1–3: научная база, практика, применение.</p>
+        <div class="amount">2500 ₽</div>
+        <p class="note">Кофе и печенье включены</p>
+      </div>
+      <div class="card">
+        <h3>День 2 · 25 октября</h3>
+        <p>Секция 4 + общая дискуссия и подведение итогов.</p>
+        <div class="amount">1500 ₽</div>
+        <p class="note">Кофе и печенье включены</p>
+      </div>
+      <div class="card">
+        <h3>Пакет на оба дня</h3>
+        <p>Полная программа двух дней семинара.</p>
+        <div class="amount">3500 ₽</div>
+        <p class="note">Выгода 500 ₽</p>
+      </div>
+    </div>
+    <ul class="plain" style="margin-top:22px">
+      <li>До 20 лет — бесплатно, по билету.</li>
+      <li>Круглые столы — отдельный билет.</li>
+      <li>Обед/ужин — за небольшую доплату.</li>
+      <li>Ранние продажи — за 1,5–2 месяца до семинара.</li>
+    </ul>
+  </div>
+</section>
+
+<section id="format">
+  <div class="container">
+    <h2>Формат</h2>
+    <ul class="plain">
+      <li>Доклады: 3 на секцию по 15+15 минут или 4 по 10+10 (доклад/вопросы).</li>
+      <li>Платная трансляция, запись с нарезкой докладов, мерч.</li>
+      <li>Флешка с офлайн-моделью-помощником и RAG-оцифровка докладов.</li>
+      <li>После семинара — пресс-релиз и публикации докладов.</li>
+    </ul>
+  </div>
+</section>
+
+<section id="register">
+  <div class="container">
+    <h2 style="text-align:center">Регистрация</h2>
+    <p class="section-sub" style="margin:0 auto 30px;text-align:center">Оставьте заявку — мы свяжемся с вами для подтверждения участия и оплаты.</p>
+    <form id="reg-form">
+      <div class="field">
+        <label for="fname">Имя и фамилия</label>
+        <input id="fname" type="text" required placeholder="Иван Иванов">
+      </div>
+      <div class="field">
+        <label for="femail">E-mail</label>
+        <input id="femail" type="email" required placeholder="you@example.com">
+      </div>
+      <div class="field">
+        <label for="fticket">Билет</label>
+        <select id="fticket">
+          <option value="Пакет на оба дня (3500 ₽)" selected>Пакет на оба дня — 3500 ₽</option>
+          <option value="День 1 (2500 ₽)">День 1 — 2500 ₽</option>
+          <option value="День 2 (1500 ₽)">День 2 — 1500 ₽</option>
+        </select>
+      </div>
+      <button type="submit" class="btn btn-primary">Участвовать в семинаре</button>
+    </form>
+    <div class="success" id="reg-success">
+      <h3>Заявка принята!</h3>
+      <p>Билет: <strong id="ticket-echo"></strong><br>Мы свяжемся с вами по указанному e-mail.</p>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    Семинар «Сумма технологий» · Санкт-Петербург, Васильевский остров · 24–25 октября
+  </div>
+</footer>
+
+<script>
+(function(){
+  var CONFIG = { endpoint: "" };
+  var form = document.getElementById('reg-form');
+  var success = document.getElementById('reg-success');
+  form.addEventListener('submit', function(e){
+    e.preventDefault();
+    var data = {
+      name: document.getElementById('fname').value.trim(),
+      email: document.getElementById('femail').value.trim(),
+      ticket: document.getElementById('fticket').value,
+      date: new Date().toISOString()
+    };
+    var list = JSON.parse(localStorage.getItem('summa_registrations') || '[]');
+    list.push(data);
+    localStorage.setItem('summa_registrations', JSON.stringify(list));
+    if (CONFIG.endpoint) {
+      fetch(CONFIG.endpoint, {method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify(data)}).catch(function(){});
+    }
+    document.getElementById('ticket-echo').textContent = data.ticket;
+    form.style.display = 'none';
+    success.style.display = 'block';
+  });
+})();
+</script>
+</body>
+</html>
