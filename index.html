@@ -194,5 +194,11 @@ footer{padding:36px 0;border-top:1px solid var(--border);color:var(--muted);text
   </div>
 </footer>
 
+<script>
+if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
+window.scrollTo(0, 0);
+window.addEventListener('load', function(){ window.scrollTo(0, 0); });
+</script>
+
 </body>
 </html>
