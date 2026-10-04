@@ -3,6 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<script>if('scrollRestoration' in history){history.scrollRestoration='manual';}</script>
 <title>Сумма технологий — семинар об ИИ, Санкт-Петербург, 24–25 октября</title>
 <style>
 :root{
@@ -49,6 +50,12 @@ header.hero{
 .hero-content .tagline{animation-delay:6s}
 .hero-content .lead{animation-delay:7s}
 
+.reveal{opacity:0;transform:translateY(26px);transition:opacity .7s ease,transform .7s ease}
+.reveal.visible{opacity:1;transform:none}
+.grid .card:nth-child(2){transition-delay:.12s}
+.grid .card:nth-child(3){transition-delay:.24s}
+.grid .card:nth-child(4){transition-delay:.36s}
+
 .eyebrow{letter-spacing:.22em;text-transform:uppercase;color:var(--accent);font-size:13px;margin-bottom:18px}
 h1{font-size:clamp(42px,7vw,76px);color:var(--gold);font-weight:700;line-height:1.05;margin-bottom:16px;text-shadow:0 2px 24px rgba(0,0,0,.6)}
 .tagline{font-size:clamp(17px,2.4vw,22px);color:var(--accent);margin-bottom:18px;font-weight:600;text-shadow:0 1px 14px rgba(0,0,0,.6)}
@@ -81,6 +88,7 @@ footer{padding:36px 0;border-top:1px solid var(--border);color:var(--muted);text
 @media (prefers-reduced-motion: reduce){
   .hero-bg img,.hero-content .eyebrow,.hero-content h1,.hero-content .tagline,.hero-content .lead{animation:none;opacity:1}
   .hero-bg img{opacity:.5}
+  .reveal{opacity:1;transform:none;transition:none}
 }
 </style>
 </head>
@@ -114,38 +122,38 @@ footer{padding:36px 0;border-top:1px solid var(--border);color:var(--muted);text
 <section id="about">
   <div class="section-bg"><img src="section-1.jpg" alt=""></div>
   <div class="container">
-    <h2>Идея семинара</h2>
-    <p class="section-sub">Название — отсылка к трактату Станислава Лема «Summa Technologiae» (1964): там, где средневековый схоласт систематизировал божественное, Лем систематизирует технологическое. Семинар продолжает эту рамку: ИИ — не «гаджет», а следующий шаг логики развития сложных систем. Мы разбираем, где заканчивается наука и технология и начинается магия маркетинга, и обсуждаем модели будущего, состоятельность которых можно проверять.</p>
+    <h2 class="reveal">Идея семинара</h2>
+    <p class="section-sub reveal">Название — отсылка к трактату Станислава Лема «Summa Technologiae» (1964): там, где средневековый схоласт систематизировал божественное, Лем систематизирует технологическое. Семинар продолжает эту рамку: ИИ — не «гаджет», а следующий шаг логики развития сложных систем. Мы разбираем, где заканчивается наука и технология и начинается магия маркетинга, и обсуждаем модели будущего, состоятельность которых можно проверять.</p>
   </div>
 </section>
 
 <section id="sections">
   <div class="section-bg"><img src="section-2.jpg" alt=""></div>
   <div class="container">
-    <h2>Четыре секции</h2>
+    <h2 class="reveal">Четыре секции</h2>
     <div class="grid">
-      <div class="card card--media">
+      <div class="card card--media reveal">
         <img src="section-1.jpg" alt="Научно-техническая база ИИ">
         <div class="card-body">
           <h3>1. Научно-техническая база ИИ</h3>
           <p>Архитектуры трансформеров, принципы обучения, эмбеддинги, attention, ограничения моделей. Разговор на языке инженеров и исследователей.</p>
         </div>
       </div>
-      <div class="card card--media">
+      <div class="card card--media reveal">
         <img src="section-2.jpg" alt="Практическая лаборатория личного ИИ">
         <div class="card-body">
           <h3>2. Практическая лаборатория личного ИИ</h3>
           <p>Запуск локальных моделей (Llama, Mistral, Qwen), приватные ассистенты, автоматизация задач. Только рабочие инструменты.</p>
         </div>
       </div>
-      <div class="card card--media">
+      <div class="card card--media reveal">
         <img src="section-3.jpg" alt="ИИ в образовании, творчестве и профессиях">
         <div class="card-body">
           <h3>3. ИИ в образовании, творчестве и профессиях</h3>
           <p>Реальные кейсы из школ, вузов, студий и офисов: где нейросеть усиливает человека, а где подменяет.</p>
         </div>
       </div>
-      <div class="card card--media">
+      <div class="card card--media reveal">
         <img src="section-4.jpg" alt="Футурология, история, этика, риски">
         <div class="card-body">
           <h3>4. Футурология, история, этика, риски</h3>
@@ -159,28 +167,28 @@ footer{padding:36px 0;border-top:1px solid var(--border);color:var(--muted);text
 <section id="program">
   <div class="section-bg"><img src="section-3.jpg" alt=""></div>
   <div class="container">
-    <h2>Программа и билеты</h2>
+    <h2 class="reveal">Программа и билеты</h2>
     <div class="grid">
-      <div class="card">
+      <div class="card reveal">
         <h3>День 1 · 24 октября</h3>
         <p>Секции 1–3: научная база, практика, применение.</p>
         <div class="amount">2500 ₽</div>
         <p class="note">Кофе и печенье включены</p>
       </div>
-      <div class="card">
+      <div class="card reveal">
         <h3>День 2 · 25 октября</h3>
         <p>Секция 4 + общая дискуссия и подведение итогов.</p>
         <div class="amount">1500 ₽</div>
         <p class="note">Кофе и печенье включены</p>
       </div>
-      <div class="card">
+      <div class="card reveal">
         <h3>Пакет на оба дня</h3>
         <p>Полная программа двух дней семинара.</p>
         <div class="amount">3500 ₽</div>
         <p class="note">Выгода 500 ₽</p>
       </div>
     </div>
-    <ul class="plain" style="margin-top:22px">
+    <ul class="plain reveal" style="margin-top:22px">
       <li>До 20 лет — бесплатно, по билету.</li>
       <li>Круглые столы — отдельный билет.</li>
       <li>Обед/ужин — за небольшую доплату.</li>
@@ -192,8 +200,8 @@ footer{padding:36px 0;border-top:1px solid var(--border);color:var(--muted);text
 <section id="format">
   <div class="section-bg"><img src="section-4.jpg" alt=""></div>
   <div class="container">
-    <h2>Формат</h2>
-    <ul class="plain">
+    <h2 class="reveal">Формат</h2>
+    <ul class="plain reveal">
       <li>Доклады: 3 на секцию по 15+15 минут или 4 по 10+10 (доклад/вопросы).</li>
       <li>Платная трансляция, запись с нарезкой докладов, мерч.</li>
       <li>Флешка с офлайн-моделью-помощником и RAG-оцифровка докладов.</li>
@@ -204,9 +212,9 @@ footer{padding:36px 0;border-top:1px solid var(--border);color:var(--muted);text
 
 <section id="register">
   <div class="container">
-    <h2>Регистрация</h2>
-    <p class="section-sub">Заявки принимаем через Яндекс Форму: заполните короткую анкету — мы свяжемся с вами для подтверждения участия и оплаты.</p>
-    <a class="btn btn-primary btn-xl" target="_blank" rel="noopener" href="https://forms.yandex.ru/u/6ac20eb91f1eb51bc88cc4bd/">Участвовать в семинаре</a>
+    <h2 class="reveal">Регистрация</h2>
+    <p class="section-sub reveal">Заявки принимаем через Яндекс Форму: заполните короткую анкету — мы свяжемся с вами для подтверждения участия и оплаты.</p>
+    <a class="btn btn-primary btn-xl reveal" target="_blank" rel="noopener" href="https://forms.yandex.ru/u/6ac20eb91f1eb51bc88cc4bd/">Участвовать в семинаре</a>
   </div>
 </section>
 
@@ -217,9 +225,22 @@ footer{padding:36px 0;border-top:1px solid var(--border);color:var(--muted);text
 </footer>
 
 <script>
-if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
-window.scrollTo(0, 0);
-window.addEventListener('load', function(){ window.scrollTo(0, 0); });
+(function(){
+  var els = document.querySelectorAll('.reveal');
+  if (!('IntersectionObserver' in window)) {
+    for (var i = 0; i < els.length; i++) els[i].classList.add('visible');
+    return;
+  }
+  var io = new IntersectionObserver(function(entries){
+    entries.forEach(function(en){
+      if (en.isIntersecting) {
+        en.target.classList.add('visible');
+        io.unobserve(en.target);
+      }
+    });
+  }, {threshold:.15, rootMargin:'0px 0px -40px 0px'});
+  for (var i = 0; i < els.length; i++) io.observe(els[i]);
+})();
 </script>
 
 </body>
