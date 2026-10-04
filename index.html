@@ -34,6 +34,7 @@ h1{font-size:clamp(42px,7vw,76px);color:var(--gold);font-weight:700;line-height:
 .btn{display:inline-block;padding:15px 34px;border-radius:10px;font-weight:700;font-size:16px;text-decoration:none;cursor:pointer;border:none;transition:transform .15s ease, box-shadow .15s ease}
 .btn-primary{background:linear-gradient(90deg,var(--accent),#3b82f6);color:#041018;box-shadow:0 6px 24px rgba(45,212,234,.25)}
 .btn-primary:hover{transform:translateY(-2px);box-shadow:0 10px 30px rgba(45,212,234,.35)}
+.btn-xl{padding:18px 46px;font-size:18px}
 section{padding:70px 0}
 h2{color:var(--gold);font-size:clamp(26px,4vw,34px);margin-bottom:14px}
 .section-sub{color:var(--muted);max-width:720px;margin-bottom:30px}
@@ -46,15 +47,8 @@ h2{color:var(--gold);font-size:clamp(26px,4vw,34px);margin-bottom:14px}
 ul.plain{list-style:none}
 ul.plain li{padding:8px 0 8px 26px;position:relative;color:var(--muted)}
 ul.plain li::before{content:"▸";color:var(--accent);position:absolute;left:4px}
-#register{background:linear-gradient(180deg,transparent,rgba(45,212,234,.05))}
-form{max-width:520px;margin:0 auto;background:var(--panel);border:1px solid var(--border);border-radius:16px;padding:30px}
-.field{margin-bottom:16px;text-align:left}
-.field label{display:block;font-size:14px;color:var(--muted);margin-bottom:6px}
-.field input,.field select{width:100%;padding:13px 14px;border-radius:10px;border:1px solid var(--border);background:#0d1526;color:var(--text);font-size:15px;outline:none}
-.field input:focus,.field select:focus{border-color:var(--accent)}
-form .btn{width:100%}
-.success{display:none;max-width:520px;margin:0 auto;text-align:center;background:var(--panel);border:1px solid var(--accent);border-radius:16px;padding:40px 30px}
-.success h3{color:var(--accent);margin-bottom:10px}
+#register{background:linear-gradient(180deg,transparent,rgba(45,212,234,.05));text-align:center}
+#register .section-sub{margin:0 auto 30px;text-align:center}
 footer{padding:36px 0;border-top:1px solid var(--border);color:var(--muted);text-align:center;font-size:14px}
 </style>
 </head>
@@ -160,31 +154,10 @@ footer{padding:36px 0;border-top:1px solid var(--border);color:var(--muted);text
 
 <section id="register">
   <div class="container">
-    <h2 style="text-align:center">Регистрация</h2>
-    <p class="section-sub" style="margin:0 auto 30px;text-align:center">Оставьте заявку — мы свяжемся с вами для подтверждения участия и оплаты.</p>
-    <form id="reg-form">
-      <div class="field">
-        <label for="fname">Имя и фамилия</label>
-        <input id="fname" type="text" required placeholder="Иван Иванов">
-      </div>
-      <div class="field">
-        <label for="femail">E-mail</label>
-        <input id="femail" type="email" required placeholder="you@example.com">
-      </div>
-      <div class="field">
-        <label for="fticket">Билет</label>
-        <select id="fticket">
-          <option value="Пакет на оба дня (3500 ₽)" selected>Пакет на оба дня — 3500 ₽</option>
-          <option value="День 1 (2500 ₽)">День 1 — 2500 ₽</option>
-          <option value="День 2 (1500 ₽)">День 2 — 1500 ₽</option>
-        </select>
-      </div>
-      <button type="submit" class="btn btn-primary">Участвовать в семинаре</button>
-    </form>
-    <div class="success" id="reg-success">
-      <h3>Заявка принята!</h3>
-      <p>Билет: <strong id="ticket-echo"></strong><br>Мы свяжемся с вами по указанному e-mail.</p>
-    </div>
+    <h2>Регистрация</h2>
+    <p class="section-sub">Заявки принимаем через Яндекс Форму: заполните короткую анкету — мы свяжемся с вами для подтверждения участия и оплаты.</p>
+    <!-- ЗАМЕНИТЕ PLACEHOLDER на ссылку опубликованной Яндекс Формы -->
+    <a class="btn btn-primary btn-xl" target="_blank" rel="noopener" href="https://forms.yandex.ru/u/PLACEHOLDER/">Участвовать в семинаре</a>
   </div>
 </section>
 
@@ -194,30 +167,5 @@ footer{padding:36px 0;border-top:1px solid var(--border);color:var(--muted);text
   </div>
 </footer>
 
-<script>
-(function(){
-  var CONFIG = { endpoint: "" };
-  var form = document.getElementById('reg-form');
-  var success = document.getElementById('reg-success');
-  form.addEventListener('submit', function(e){
-    e.preventDefault();
-    var data = {
-      name: document.getElementById('fname').value.trim(),
-      email: document.getElementById('femail').value.trim(),
-      ticket: document.getElementById('fticket').value,
-      date: new Date().toISOString()
-    };
-    var list = JSON.parse(localStorage.getItem('summa_registrations') || '[]');
-    list.push(data);
-    localStorage.setItem('summa_registrations', JSON.stringify(list));
-    if (CONFIG.endpoint) {
-      fetch(CONFIG.endpoint, {method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify(data)}).catch(function(){});
-    }
-    document.getElementById('ticket-echo').textContent = data.ticket;
-    form.style.display = 'none';
-    success.style.display = 'block';
-  });
-})();
-</script>
 </body>
 </html>
