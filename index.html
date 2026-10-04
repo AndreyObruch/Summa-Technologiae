@@ -62,6 +62,9 @@ h2{color:var(--gold);font-size:clamp(26px,4vw,34px);margin-bottom:14px}
 .section-sub{color:var(--muted);max-width:720px;margin-bottom:30px}
 .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px}
 .card{background:var(--panel);border:1px solid var(--border);border-radius:14px;padding:24px}
+.card--media{padding:0;overflow:hidden}
+.card--media img{width:100%;height:170px;object-fit:cover;display:block}
+.card--media .card-body{padding:24px}
 .card h3{color:var(--accent);font-size:18px;margin-bottom:10px}
 .card p{color:var(--muted);font-size:15px}
 .card .amount{font-size:30px;color:var(--gold);font-weight:700;margin:6px 0}
@@ -116,21 +119,33 @@ footer{padding:36px 0;border-top:1px solid var(--border);color:var(--muted);text
   <div class="container">
     <h2>Четыре секции</h2>
     <div class="grid">
-      <div class="card">
-        <h3>1. Научно-техническая база ИИ</h3>
-        <p>Архитектуры трансформеров, принципы обучения, эмбеддинги, attention, ограничения моделей. Разговор на языке инженеров и исследователей.</p>
+      <div class="card card--media">
+        <img src="section-1.jpg" alt="Научно-техническая база ИИ">
+        <div class="card-body">
+          <h3>1. Научно-техническая база ИИ</h3>
+          <p>Архитектуры трансформеров, принципы обучения, эмбеддинги, attention, ограничения моделей. Разговор на языке инженеров и исследователей.</p>
+        </div>
       </div>
-      <div class="card">
-        <h3>2. Практическая лаборатория личного ИИ</h3>
-        <p>Запуск локальных моделей (Llama, Mistral, Qwen), приватные ассистенты, автоматизация задач. Только рабочие инструменты.</p>
+      <div class="card card--media">
+        <img src="section-2.jpg" alt="Практическая лаборатория личного ИИ">
+        <div class="card-body">
+          <h3>2. Практическая лаборатория личного ИИ</h3>
+          <p>Запуск локальных моделей (Llama, Mistral, Qwen), приватные ассистенты, автоматизация задач. Только рабочие инструменты.</p>
+        </div>
       </div>
-      <div class="card">
-        <h3>3. ИИ в образовании, творчестве и профессиях</h3>
-        <p>Реальные кейсы из школ, вузов, студий и офисов: где нейросеть усиливает человека, а где подменяет.</p>
+      <div class="card card--media">
+        <img src="section-3.jpg" alt="ИИ в образовании, творчестве и профессиях">
+        <div class="card-body">
+          <h3>3. ИИ в образовании, творчестве и профессиях</h3>
+          <p>Реальные кейсы из школ, вузов, студий и офисов: где нейросеть усиливает человека, а где подменяет.</p>
+        </div>
       </div>
-      <div class="card">
-        <h3>4. Футурология, история, этика, риски</h3>
-        <p>От «Голема» и «Франкенштейна» до корпоративных войн за AGI: сингулярность, безработица, цензура, автономные агенты. Академично, без «инопланетян».</p>
+      <div class="card card--media">
+        <img src="section-4.jpg" alt="Футурология, история, этика, риски">
+        <div class="card-body">
+          <h3>4. Футурология, история, этика, риски</h3>
+          <p>От «Голема» и «Франкенштейна» до корпоративных войн за AGI: сингулярность, безработица, цензура, автономные агенты. Академично, без «инопланетян».</p>
+        </div>
       </div>
     </div>
   </div>
