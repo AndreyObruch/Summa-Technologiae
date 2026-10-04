@@ -18,8 +18,9 @@ html{scroll-behavior:smooth}
 body{font-family:'Segoe UI',system-ui,-apple-system,sans-serif;background:var(--bg);color:var(--text);line-height:1.6}
 .container{max-width:1040px;margin:0 auto;padding:0 20px}
 .nav{position:sticky;top:0;z-index:20;background:rgba(10,17,32,.92);backdrop-filter:blur(8px);border-bottom:1px solid var(--border)}
-.nav .container{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:14px 20px;flex-wrap:wrap}
-.nav-logo{color:var(--gold);font-weight:700;text-decoration:none;font-size:17px;white-space:nowrap}
+.nav .container{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:10px 20px;flex-wrap:wrap}
+.nav-logo{display:block;text-decoration:none}
+.nav-logo img{height:44px;width:auto;display:block;border-radius:8px}
 .nav-links{display:flex;gap:22px;flex-wrap:wrap;align-items:center}
 .nav-links a{color:var(--muted);text-decoration:none;font-size:14px;transition:color .15s}
 .nav-links a:hover{color:var(--accent)}
@@ -62,7 +63,7 @@ header.hero{
 .eyebrow{letter-spacing:.22em;text-transform:uppercase;color:var(--accent);font-size:13px;margin-bottom:18px}
 h1{font-size:clamp(42px,7vw,76px);color:var(--gold);font-weight:700;line-height:1.05;margin-bottom:16px;text-shadow:0 2px 24px rgba(0,0,0,.6)}
 .tagline{font-size:clamp(17px,2.4vw,22px);color:var(--accent);margin-bottom:18px;font-weight:600;text-shadow:0 1px 14px rgba(0,0,0,.6)}
-.lead{max-width:640px;margin:0 auto 34px;color:#d6e0ee;font-size:17px;text-shadow:0 1px 14px rgba(0,0,0,.6)}
+.lead{max-width:640px;margin:0 auto 34px;color:var(--gold);font-size:17px;text-shadow:0 1px 12px rgba(0,0,0,.8)}
 .btn{display:inline-block;padding:15px 34px;border-radius:10px;font-weight:700;font-size:16px;text-decoration:none;cursor:pointer;border:none;transition:transform .15s ease, box-shadow .15s ease}
 .btn-primary{background:linear-gradient(90deg,var(--accent),#3b82f6);color:#041018;box-shadow:0 6px 24px rgba(45,212,234,.25)}
 .btn-primary:hover{transform:translateY(-2px);box-shadow:0 10px 30px rgba(45,212,234,.35)}
@@ -73,6 +74,7 @@ section > .container{position:relative;z-index:1}
 .section-bg img{width:100%;height:100%;object-fit:cover;object-position:center;opacity:.5}
 h2{color:var(--gold);font-size:clamp(26px,4vw,34px);margin-bottom:14px}
 .section-sub{color:var(--muted);max-width:720px;margin-bottom:30px}
+#about .section-sub{color:var(--gold);text-shadow:0 1px 12px rgba(0,0,0,.8)}
 .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px}
 .card{background:var(--panel);border:1px solid var(--border);border-radius:14px;padding:24px}
 .card--media{padding:0;overflow:hidden}
@@ -85,6 +87,7 @@ h2{color:var(--gold);font-size:clamp(26px,4vw,34px);margin-bottom:14px}
 ul.plain{list-style:none}
 ul.plain li{padding:8px 0 8px 26px;position:relative;color:var(--muted)}
 ul.plain li::before{content:"▸";color:var(--accent);position:absolute;left:4px}
+#program ul.plain li,#format ul.plain li{color:var(--gold);text-shadow:0 1px 12px rgba(0,0,0,.8)}
 #register{background:linear-gradient(180deg,transparent,rgba(45,212,234,.05));text-align:center}
 #register .section-sub{margin:0 auto 30px;text-align:center}
 footer{padding:36px 0;border-top:1px solid var(--border);color:var(--muted);text-align:center;font-size:14px}
@@ -107,7 +110,7 @@ footer{padding:36px 0;border-top:1px solid var(--border);color:var(--muted);text
 
 <nav class="nav">
   <div class="container">
-    <a class="nav-logo" href="#top">Сумма технологий</a>
+    <a class="nav-logo" href="#top"><img src="logo.png" alt="Сумма технологий"></a>
     <div class="nav-links">
       <a href="#about">Идея</a>
       <a href="#sections">Секции</a>
