@@ -239,12 +239,23 @@ footer{padding:36px 0;border-top:1px solid var(--border);color:var(--muted);text
 <div class="modal" id="form-modal" aria-hidden="true">
   <div class="modal-box">
     <button class="modal-close" id="form-close" aria-label="Закрыть">×</button>
-    <iframe id="form-frame" src="" title="Заявка на участие"></iframe>
+    <iframe id="form-frame" title="Заявка на участие"></iframe>
   </div>
 </div>
 
 <script>
 (function(){
+  function toTop(){
+    if (location.hash) return;
+    var sb = document.documentElement.style.scrollBehavior;
+    document.documentElement.style.scrollBehavior = 'auto';
+    window.scrollTo(0, 0);
+    document.documentElement.style.scrollBehavior = sb || '';
+  }
+  toTop();
+  window.addEventListener('load', toTop);
+  window.addEventListener('pageshow', function(e){ if (e.persisted) toTop(); });
+
   var FORM_URL = 'https://forms.yandex.ru/u/6ac20eb91f1eb51bc88cc4bd/';
   var modal = document.getElementById('form-modal');
   var frame = document.getElementById('form-frame');
@@ -259,7 +270,7 @@ footer{padding:36px 0;border-top:1px solid var(--border);color:var(--muted);text
   function closeForm(){
     modal.classList.remove('open');
     modal.setAttribute('aria-hidden','true');
-    frame.src = '';
+    frame.removeAttribute('src');
     document.body.style.overflow = '';
   }
   var triggers = document.querySelectorAll('[data-open-form]');
