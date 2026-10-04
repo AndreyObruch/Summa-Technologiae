@@ -13,24 +13,46 @@
 html{scroll-behavior:smooth}
 body{font-family:'Segoe UI',system-ui,-apple-system,sans-serif;background:var(--bg);color:var(--text);line-height:1.6}
 .container{max-width:1040px;margin:0 auto;padding:0 20px}
-.nav{position:sticky;top:0;z-index:10;background:rgba(10,17,32,.92);backdrop-filter:blur(8px);border-bottom:1px solid var(--border)}
+.nav{position:sticky;top:0;z-index:20;background:rgba(10,17,32,.92);backdrop-filter:blur(8px);border-bottom:1px solid var(--border)}
 .nav .container{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:14px 20px;flex-wrap:wrap}
 .nav-logo{color:var(--gold);font-weight:700;text-decoration:none;font-size:17px;white-space:nowrap}
 .nav-links{display:flex;gap:22px;flex-wrap:wrap;align-items:center}
 .nav-links a{color:var(--muted);text-decoration:none;font-size:14px;transition:color .15s}
 .nav-links a:hover{color:var(--accent)}
 .nav .btn{padding:9px 18px;font-size:14px}
+
 header.hero{
-  padding:96px 0 90px;text-align:center;
-  background:
-    radial-gradient(700px 340px at 82% 12%, rgba(45,212,234,.16), transparent),
-    radial-gradient(560px 320px at 12% 85%, rgba(59,130,246,.14), transparent),
-    var(--bg);
+  position:relative;overflow:hidden;
+  min-height:92vh;display:flex;align-items:center;justify-content:center;
+  text-align:center;padding:96px 0 90px;background:var(--bg);
 }
+.hero-bg{position:absolute;inset:0;z-index:0;overflow:hidden}
+.hero-bg img{width:100%;height:100%;object-fit:cover;object-position:center;opacity:.3;animation:imgReveal 4s ease-in-out forwards}
+.hero-overlay{position:absolute;inset:0;z-index:1;background:radial-gradient(900px 500px at 50% 40%, rgba(10,17,32,.35), rgba(10,17,32,.78));}
+.hero-content{position:relative;z-index:2}
+
+@keyframes imgReveal{
+  0%{opacity:.3}
+  50%{opacity:1}
+  100%{opacity:.5}
+}
+@keyframes fadeUp{
+  from{opacity:0;transform:translateY(22px)}
+  to{opacity:1;transform:none}
+}
+.hero-content .eyebrow,
+.hero-content h1,
+.hero-content .tagline,
+.hero-content .lead{opacity:0;animation:fadeUp .8s ease forwards}
+.hero-content .eyebrow{animation-delay:4s}
+.hero-content h1{animation-delay:5s}
+.hero-content .tagline{animation-delay:6s}
+.hero-content .lead{animation-delay:7s}
+
 .eyebrow{letter-spacing:.22em;text-transform:uppercase;color:var(--accent);font-size:13px;margin-bottom:18px}
-h1{font-size:clamp(42px,7vw,76px);color:var(--gold);font-weight:700;line-height:1.05;margin-bottom:16px}
-.tagline{font-size:clamp(17px,2.4vw,22px);color:var(--accent);margin-bottom:18px;font-weight:600}
-.lead{max-width:640px;margin:0 auto 34px;color:var(--muted);font-size:17px}
+h1{font-size:clamp(42px,7vw,76px);color:var(--gold);font-weight:700;line-height:1.05;margin-bottom:16px;text-shadow:0 2px 24px rgba(0,0,0,.6)}
+.tagline{font-size:clamp(17px,2.4vw,22px);color:var(--accent);margin-bottom:18px;font-weight:600;text-shadow:0 1px 14px rgba(0,0,0,.6)}
+.lead{max-width:640px;margin:0 auto 34px;color:#d6e0ee;font-size:17px;text-shadow:0 1px 14px rgba(0,0,0,.6)}
 .btn{display:inline-block;padding:15px 34px;border-radius:10px;font-weight:700;font-size:16px;text-decoration:none;cursor:pointer;border:none;transition:transform .15s ease, box-shadow .15s ease}
 .btn-primary{background:linear-gradient(90deg,var(--accent),#3b82f6);color:#041018;box-shadow:0 6px 24px rgba(45,212,234,.25)}
 .btn-primary:hover{transform:translateY(-2px);box-shadow:0 10px 30px rgba(45,212,234,.35)}
@@ -50,6 +72,10 @@ ul.plain li::before{content:"▸";color:var(--accent);position:absolute;left:4px
 #register{background:linear-gradient(180deg,transparent,rgba(45,212,234,.05));text-align:center}
 #register .section-sub{margin:0 auto 30px;text-align:center}
 footer{padding:36px 0;border-top:1px solid var(--border);color:var(--muted);text-align:center;font-size:14px}
+@media (prefers-reduced-motion: reduce){
+  .hero-bg img,.hero-content .eyebrow,.hero-content h1,.hero-content .tagline,.hero-content .lead{animation:none;opacity:1}
+  .hero-bg img{opacity:.5}
+}
 </style>
 </head>
 <body>
@@ -69,7 +95,9 @@ footer{padding:36px 0;border-top:1px solid var(--border);color:var(--muted);text
 </nav>
 
 <header class="hero" id="top">
-  <div class="container">
+  <div class="hero-bg"><img src="hero.jpg" alt="Сумма технологии"></div>
+  <div class="hero-overlay"></div>
+  <div class="container hero-content">
     <p class="eyebrow">Санкт-Петербург · 24–25 октября</p>
     <h1>Сумма технологии</h1>
     <p class="tagline">Четыре грани ИИ: наука, практика, творчество, прогноз</p>
