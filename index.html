@@ -72,11 +72,12 @@ h1{font-size:clamp(42px,7vw,76px);color:var(--gold);font-weight:700;line-height:
 .btn-xl{padding:18px 46px;font-size:18px}
 section{padding:70px 0;position:relative}
 section > .container{position:relative;z-index:1}
-/* заблюренная полоса перехода между окнами: во всю длину экрана, расширена и усилена */
+/* овальная заблюренная зона перехода между окнами: во всю ширину окна, 80px по высоте, blur 50px */
 section::before{
-  content:"";position:absolute;left:0;right:0;top:-70px;height:140px;
+  content:"";position:absolute;left:0;right:0;top:-40px;height:80px;
   z-index:2;pointer-events:none;
-  backdrop-filter:blur(30px);-webkit-backdrop-filter:blur(30px);
+  border-radius:50%;
+  backdrop-filter:blur(50px);-webkit-backdrop-filter:blur(50px);
 }
 .section-bg{position:absolute;inset:-140px 0;z-index:0;pointer-events:none}
 .section-bg img{
