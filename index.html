@@ -121,14 +121,6 @@ footer .container{display:flex;flex-direction:column;align-items:center;gap:12px
 .footer-note a:hover{color:var(--gold)}
 .footer-line{color:var(--gold)}
 
-.modal{position:fixed;inset:0;z-index:100;display:none;align-items:center;justify-content:center;background:rgba(1,20,32,.82);backdrop-filter:blur(4px);padding:20px}
-.modal.open{display:flex}
-.modal-box{position:relative;width:min(760px,100%);height:min(86vh,920px);background:var(--panel);border:1px solid var(--border);border-radius:16px;overflow:hidden;box-shadow:0 20px 60px rgba(0,0,0,.5)}
-.modal-box iframe{position:absolute;left:0;top:calc(-1 * var(--crop-top));width:100%;height:calc(100% + var(--crop-top) + var(--crop-bottom));border:0;display:block;background:#fff}
-.modal-close{position:absolute;top:10px;right:10px;z-index:2;width:38px;height:38px;border-radius:50%;border:1px solid var(--border);background:rgba(1,32,50,.9);color:var(--text);font-size:22px;line-height:1;cursor:pointer}
-.modal-close:hover{color:var(--accent);border-color:var(--accent)}
-
-/* Сообщение после отправки формы */
 .success-message{
   position:fixed;
   top:50%;left:50%;
@@ -160,6 +152,20 @@ footer .container{display:flex;flex-direction:column;align-items:center;gap:12px
   font-size:16px;
   line-height:1.6;
 }
+.success-close{
+  position:absolute;
+  top:10px;right:10px;
+  width:32px;height:32px;
+  border-radius:50%;
+  border:1px solid var(--border);
+  background:rgba(1,32,50,.9);
+  color:var(--text);
+  font-size:20px;
+  line-height:1;
+  cursor:pointer;
+  display:flex;align-items:center;justify-content:center;
+}
+.success-close:hover{color:var(--accent);border-color:var(--accent)}
 
 @media (prefers-reduced-motion: reduce){
   .hero-bg img,.hero-content .eyebrow,.hero-content h1,.hero-content .tagline,.hero-content .lead{animation:none;opacity:1}
@@ -290,7 +296,7 @@ footer .container{display:flex;flex-direction:column;align-items:center;gap:12px
 <section id="register">
   <div class="container">
     <h2 class="reveal">Регистрация</h2>
-    <p class="section-sub reveal">Заявки принимаем через Яндекс Форму: заполните короткую анкету — мы свяжемся с вами для подтверждения участия и оплаты.</p>
+    <p class="section-sub reveal">Нажмите кнопку ниже — мы свяжемся с вами для подтверждения участия и оплаты.</p>
     <a href="#" data-open-form class="btn btn-primary btn-xl reveal">Участвовать в семинаре</a>
   </div>
 </section>
@@ -316,14 +322,8 @@ footer .container{display:flex;flex-direction:column;align-items:center;gap:12px
   </div>
 </footer>
 
-<div class="modal" id="form-modal" aria-hidden="true">
-  <div class="modal-box">
-    <button class="modal-close" id="form-close" aria-label="Закрыть">×</button>
-    <iframe id="form-frame" title="Заявка на участие"></iframe>
-  </div>
-</div>
-
 <div class="success-message" id="success-message">
+  <button class="success-close" id="success-close" aria-label="Закрыть">×</button>
   <h3>✓ Заявление принято</h3>
   <p>Ваше заявление на участие в семинаре приняли.<br>Свяжемся с Вами в ближайшее время.</p>
 </div>
@@ -341,41 +341,21 @@ footer .container{display:flex;flex-direction:column;align-items:center;gap:12px
   window.addEventListener('load', toTop);
   window.addEventListener('pageshow', function(e){ if (e.persisted) toTop(); });
 
-  var FORM_URL = 'https://forms.yandex.ru/u/6ac20eb91f1eb51bc88cc4bd/';
-  var modal = document.getElementById('form-modal');
-  var frame = document.getElementById('form-frame');
-  var closeBtn = document.getElementById('form-close');
   var successMsg = document.getElementById('success-message');
-  var formOpened = false;
+  var closeBtn = document.getElementById('success-close');
   
   function openForm(e){
     e.preventDefault();
-    frame.src = FORM_URL;
-    modal.classList.add('open');
-    modal.setAttribute('aria-hidden','false');
-    document.body.style.overflow = 'hidden';
-    formOpened = true;
+    successMsg.classList.add('show');
   }
   function closeForm(){
-    modal.classList.remove('open');
-    modal.setAttribute('aria-hidden','true');
-    frame.removeAttribute('src');
-    document.body.style.overflow = '';
-    
-    // Показываем сообщение об успехе после закрытия формы
-    if (formOpened) {
-      successMsg.classList.add('show');
-      setTimeout(function(){
-        successMsg.classList.remove('show');
-      }, 5000);
-      formOpened = false;
-    }
+    successMsg.classList.remove('show');
   }
   var triggers = document.querySelectorAll('[data-open-form]');
   for (var i = 0; i < triggers.length; i++) triggers[i].addEventListener('click', openForm);
   closeBtn.addEventListener('click', closeForm);
-  modal.addEventListener('click', function(e){ if (e.target === modal) closeForm(); });
-  document.addEventListener('keydown', function(e){ if (e.key === 'Escape' && modal.classList.contains('open')) closeForm(); });
+  successMsg.addEventListener('click', function(e){ if (e.target === successMsg) closeForm(); });
+  document.addEventListener('keydown', function(e){ if (e.key === 'Escape' && successMsg.classList.contains('show')) closeForm(); });
 
   var els = document.querySelectorAll('.reveal');
   if (!('IntersectionObserver' in window)) {
