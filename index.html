@@ -365,7 +365,7 @@ footer .container{display:flex;flex-direction:column;align-items:center;gap:12px
   var formCloseBtn = document.getElementById('form-close');
   var successMsg = document.getElementById('success-message');
   var successCloseBtn = document.getElementById('success-close');
-  var autoCloseTimer = null;
+  var showSuccessTimer = null;
 
   function openForm(e){
     e.preventDefault();
@@ -373,47 +373,26 @@ footer .container{display:flex;flex-direction:column;align-items:center;gap:12px
     modal.classList.add('open');
     modal.setAttribute('aria-hidden','false');
     document.body.style.overflow = 'hidden';
-    // Автозакрытие через 45 секунд (если пользователь заполнил форму)
-    autoCloseTimer = setTimeout(function(){
-      if (modal.classList.contains('open')) {
-        closeForm();
-      }
-    }, 45000);
   }
 
   function closeForm(){
-    if (autoCloseTimer) {
-      clearTimeout(autoCloseTimer);
-      autoCloseTimer = null;
-    }
     modal.classList.remove('open');
     modal.setAttribute('aria-hidden','true');
     frame.removeAttribute('src');
     document.body.style.overflow = '';
-    // Показываем сообщение
-    successMsg.classList.add('show');
+    // Через 3 секунды показать сообщение
+    showSuccessTimer = setTimeout(function(){
+      successMsg.classList.add('show');
+    }, 3000);
   }
 
   function closeSuccess(){
+    if (showSuccessTimer) {
+      clearTimeout(showSuccessTimer);
+      showSuccessTimer = null;
+    }
     successMsg.classList.remove('show');
   }
-
-  // Слушаем postMessage от iframe (Яндекс Формы отправляют событие при успешной отправке)
-  window.addEventListener('message', function(event){
-    if (event.source === frame.contentWindow) {
-      var data = event.data;
-      // Проверяем различные форматы сообщений от Яндекс Форм
-      if (data && (
-          data.type === 'form-submitted' ||
-          data === 'form-submitted' ||
-          (typeof data === 'string' && data.indexOf('success') !== -1) ||
-          (data.action === 'submit' && data.status === 'success') ||
-          (data.event === 'formSubmit' && data.success === true)
-      )) {
-        closeForm();
-      }
-    }
-  });
 
   var triggers = document.querySelectorAll('[data-open-form]');
   for (var i = 0; i < triggers.length; i++) triggers[i].addEventListener('click', openForm);
