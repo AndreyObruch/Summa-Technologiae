@@ -99,7 +99,7 @@ h2{color:var(--gold);font-size:clamp(26px,4vw,34px);margin-bottom:14px}
 .card .note{font-size:13px;color:var(--muted)}
 ul.plain{list-style:none}
 ul.plain li{padding:8px 0 8px 26px;position:relative;color:var(--muted)}
-ul.plain li::before{content:"";color:var(--accent);position:absolute;left:4px}
+ul.plain li::before{content:"▸";color:var(--accent);position:absolute;left:4px}
 #program ul.plain li,#format ul.plain li{color:var(--gold);text-shadow:0 1px 12px rgba(0,0,0,.8)}
 #register{background:linear-gradient(180deg,transparent,rgba(45,212,234,.05));text-align:center}
 #register .section-sub{margin:0 auto 30px;text-align:center}
@@ -339,7 +339,7 @@ footer .container{display:flex;flex-direction:column;align-items:center;gap:12px
   </div>
 </div>
 
-<!-- Сообщение после закрытия формы -->
+<!-- Сообщение после отправки -->
 <div class="success-message" id="success-message">
   <button class="success-close" id="success-close" aria-label="Закрыть">×</button>
   <h3>✓ Заявление принято</h3>
@@ -365,7 +365,7 @@ footer .container{display:flex;flex-direction:column;align-items:center;gap:12px
   var formCloseBtn = document.getElementById('form-close');
   var successMsg = document.getElementById('success-message');
   var successCloseBtn = document.getElementById('success-close');
-  var formWasOpened = false;
+  var autoCloseTimer = null;
 
   function openForm(e){
     e.preventDefault();
@@ -373,23 +373,47 @@ footer .container{display:flex;flex-direction:column;align-items:center;gap:12px
     modal.classList.add('open');
     modal.setAttribute('aria-hidden','false');
     document.body.style.overflow = 'hidden';
-    formWasOpened = true;
+    // Автозакрытие через 45 секунд (если пользователь заполнил форму)
+    autoCloseTimer = setTimeout(function(){
+      if (modal.classList.contains('open')) {
+        closeForm();
+      }
+    }, 45000);
   }
 
   function closeForm(){
+    if (autoCloseTimer) {
+      clearTimeout(autoCloseTimer);
+      autoCloseTimer = null;
+    }
     modal.classList.remove('open');
     modal.setAttribute('aria-hidden','true');
     frame.removeAttribute('src');
     document.body.style.overflow = '';
-    if (formWasOpened) {
-      successMsg.classList.add('show');
-      formWasOpened = false;
-    }
+    // Показываем сообщение
+    successMsg.classList.add('show');
   }
 
   function closeSuccess(){
     successMsg.classList.remove('show');
   }
+
+  // Слушаем postMessage от iframe (Яндекс Формы отправляют событие при успешной отправке)
+  window.addEventListener('message', function(event){
+    if (event.source === frame.contentWindow) {
+      var data = event.data;
+      // Проверяем различные форматы сообщений от Яндекс Форм
+      if (data && (
+          data.type === 'form-submitted' ||
+          data === 'form-submitted' ||
+          (typeof data === 'string' && data.indexOf('success') !== -1) ||
+          (data.action === 'submit' && data.status === 'success') ||
+          (data.event === 'formSubmit' && data.success === true)
+      )) {
+        closeForm();
+      }
+    }
+  });
 
   var triggers = document.querySelectorAll('[data-open-form]');
   for (var i = 0; i < triggers.length; i++) triggers[i].addEventListener('click', openForm);
