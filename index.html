@@ -5,210 +5,18 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <script>if('scrollRestoration' in history){history.scrollRestoration='manual';}</script>
 <title>Сумма технологий — семинар об ИИ, Санкт-Петербург, 24–25 октября</title>
-<style>
-:root{
-  --bg:#012032; --panel:#062a40; --text:#e6edf7; --muted:#9fb0c7;
-  --accent:#2dd4ea; --gold:#f0b429; --border:rgba(255,255,255,.08);
-  --crop-top:300px;
-  --crop-bottom:150px;
-}
-*{box-sizing:border-box;margin:0;padding:0}
-html{scroll-behavior:smooth}
-body{font-family:'Segoe UI',system-ui,-apple-system,sans-serif;background:var(--bg);color:var(--text);line-height:1.6}
-.container{max-width:1040px;margin:0 auto;padding:0 20px}
-.nav{position:sticky;top:0;z-index:20;background:rgba(1,32,50,.92);backdrop-filter:blur(8px);border-bottom:1px solid var(--border)}
-.nav .container{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:10px 20px;flex-wrap:wrap}
-.nav-logo{display:block;text-decoration:none}
-.nav-logo img{height:44px;width:auto;display:block;border-radius:8px}
-.nav-links{display:flex;gap:22px;flex-wrap:wrap;align-items:center}
-.nav-links a{color:var(--muted);text-decoration:none;font-size:14px;transition:color .15s}
-.nav-links a:hover{color:var(--accent)}
-.nav .btn{padding:9px 18px;font-size:14px}
-
-header.hero{
-  position:relative;overflow:hidden;
-  min-height:92vh;display:flex;align-items:center;justify-content:center;
-  text-align:center;padding:96px 0 90px;background:var(--bg);
-}
-.hero-bg{position:absolute;inset:0;z-index:0;overflow:hidden}
-.hero-bg img{
-  width:100%;height:100%;object-fit:cover;object-position:center;opacity:.3;
-  animation:imgReveal 4s ease-in-out forwards;
-  -webkit-mask-image:linear-gradient(180deg,#000 0%,#000 82%,transparent 100%);
-  mask-image:linear-gradient(180deg,#000 0%,#000 82%,transparent 100%);
-}
-.hero-overlay{position:absolute;inset:0;z-index:1;background:radial-gradient(900px 500px at 50% 40%, rgba(1,32,50,.35), rgba(1,32,50,.80));}
-.hero-content{position:relative;z-index:2}
-
-@keyframes imgReveal{
-  0%{opacity:.3}
-  50%{opacity:1}
-  100%{opacity:.5}
-}
-@keyframes fadeUp{
-  from{opacity:0;transform:translateY(22px)}
-  to{opacity:1;transform:none}
-}
-.hero-content .eyebrow,
-.hero-content h1,
-.hero-content .tagline,
-.hero-content .lead{opacity:0;animation:fadeUp .8s ease forwards}
-.hero-content .eyebrow{animation-delay:4s}
-.hero-content h1{animation-delay:5s}
-.hero-content .tagline{animation-delay:6s}
-.hero-content .lead{animation-delay:7s}
-
-.reveal{opacity:0;transform:translateY(26px);transition:opacity .7s ease,transform .7s ease}
-.reveal.visible{opacity:1;transform:none}
-
-.eyebrow{letter-spacing:.22em;text-transform:uppercase;color:var(--accent);font-size:13px;margin-bottom:18px}
-h1{font-size:clamp(42px,7vw,76px);color:var(--gold);font-weight:700;line-height:1.05;margin-bottom:16px;text-shadow:0 2px 24px rgba(0,0,0,.6)}
-.tagline{font-size:clamp(17px,2.4vw,22px);color:var(--accent);margin-bottom:18px;font-weight:600;text-shadow:0 1px 14px rgba(0,0,0,.6)}
-.lead{max-width:640px;margin:0 auto 34px;color:var(--gold);font-size:17px;text-shadow:0 1px 12px rgba(0,0,0,.8)}
-.btn{display:inline-block;padding:15px 34px;border-radius:10px;font-weight:700;font-size:16px;text-decoration:none;cursor:pointer;border:none;transition:transform .15s ease, box-shadow .15s ease}
-.btn-primary{background:linear-gradient(90deg,var(--accent),#3b82f6);color:#041018;box-shadow:0 6px 24px rgba(45,212,234,.25)}
-.btn-primary:hover{transform:translateY(-2px);box-shadow:0 10px 30px rgba(45,212,234,.35)}
-.btn-xl{padding:18px 46px;font-size:18px}
-.btn-sm{padding:10px 24px;font-size:14px}
-section{padding:70px 0;position:relative}
-section > .container{position:relative;z-index:1}
-section::before{
-  content:"";position:absolute;left:0;right:0;top:-40px;height:80px;
-  z-index:2;pointer-events:none;
-  border-radius:50%;
-  backdrop-filter:blur(50px);-webkit-backdrop-filter:blur(50px);
-}
-.section-bg{position:absolute;inset:-140px 0;z-index:0;pointer-events:none}
-.section-bg img{
-  width:100%;height:100%;object-fit:cover;object-position:center;
-  opacity:.18;filter:blur(3px);
-  -webkit-mask-image:linear-gradient(180deg,transparent 0%,#000 30%,#000 70%,transparent 100%);
-  mask-image:linear-gradient(180deg,transparent 0%,#000 30%,#000 70%,transparent 100%);
-}
-h2{color:var(--gold);font-size:clamp(26px,4vw,34px);margin-bottom:14px}
-.section-sub{color:var(--muted);max-width:720px;margin-bottom:30px}
-#about .section-sub{color:var(--gold);text-shadow:0 1px 12px rgba(0,0,0,.8)}
-.grid{display:flex;flex-wrap:wrap;justify-content:center;gap:16px}
-.grid .card{flex:1 1 240px;max-width:340px}
-.card{background:var(--panel);border:1px solid var(--border);border-radius:14px;padding:24px}
-.card--media{padding:0;overflow:hidden}
-.card--media img{width:100%;height:170px;object-fit:cover;display:block}
-.card--media .card-body{padding:24px}
-.card h3{color:var(--accent);font-size:18px;margin-bottom:10px}
-.card p{color:var(--muted);font-size:15px}
-.card .amount{font-size:30px;color:var(--gold);font-weight:700;margin:6px 0}
-.card .note{font-size:13px;color:var(--muted)}
-.card .slogan{color:var(--accent);font-style:italic;font-size:14px;margin-top:10px}
-ul.plain{list-style:none}
-ul.plain li{padding:8px 0 8px 26px;position:relative;color:var(--muted)}
-ul.plain li::before{content:"▸";color:var(--accent);position:absolute;left:4px}
-#program ul.plain li,#format ul.plain li{color:var(--gold);text-shadow:0 1px 12px rgba(0,0,0,.8)}
-#register{background:linear-gradient(180deg,transparent,rgba(45,212,234,.05));text-align:center}
-#register .section-sub{margin:0 auto 30px;text-align:center}
-
-.manifest{background:rgba(6,42,64,.35)}
-.manifest h3{color:var(--accent);font-size:18px;margin:26px 0 8px}
-.manifest p{color:var(--muted);font-size:16px;max-width:820px}
-
-.tg-block{margin-top:26px;background:var(--panel);border:1px solid var(--border);border-radius:14px;padding:24px;text-align:left}
-.tg-block h3{color:var(--accent);font-size:18px;margin-bottom:10px}
-.tg-block p{color:var(--muted);font-size:15px}
-.tg-block a{color:var(--accent)}
-
-footer{padding:40px 0;border-top:1px solid var(--border);color:var(--muted);text-align:center;font-size:14px}
-footer .container{display:flex;flex-direction:column;align-items:center;gap:12px}
-.footer-contacts{display:flex;justify-content:center;gap:14px;flex-wrap:wrap}
-.contact-btn{
-  width:46px;height:46px;border-radius:50%;
-  border:1px solid var(--border);background:var(--panel);
-  display:flex;align-items:center;justify-content:center;
-  color:var(--accent);text-decoration:none;
-  transition:transform .15s ease, box-shadow .15s ease, color .15s ease, border-color .15s ease;
-}
-.contact-btn:hover{color:var(--gold);border-color:var(--accent);transform:translateY(-2px);box-shadow:0 6px 18px rgba(45,212,234,.25)}
-.contact-btn svg{width:22px;height:22px;fill:currentColor}
-.contact-btn .max-label{font-weight:700;font-size:11px;letter-spacing:.06em}
-.patrons{margin-top:14px}
-.patrons-title{color:var(--gold);font-size:15px;margin-bottom:10px}
-.patrons-list{list-style:none;color:var(--muted);font-size:14px;display:flex;flex-direction:column;gap:4px}
-.footer-note{color:var(--text);font-size:14px}
-.footer-note a{color:var(--accent);text-decoration:none}
-.footer-note a:hover{color:var(--gold)}
-.footer-line{color:var(--gold)}
-
-.modal{position:fixed;inset:0;z-index:100;display:none;align-items:center;justify-content:center;background:rgba(1,20,32,.82);backdrop-filter:blur(4px);padding:20px}
-.modal.open{display:flex}
-.modal-box{position:relative;width:min(760px,100%);height:min(86vh,920px);background:var(--panel);border:1px solid var(--border);border-radius:16px;overflow:hidden;box-shadow:0 20px 60px rgba(0,0,0,.5)}
-.modal-box iframe{position:absolute;left:0;top:calc(-1 * var(--crop-top));width:100%;height:calc(100% + var(--crop-top) + var(--crop-bottom));border:0;display:block;background:#fff}
-.modal-close{position:absolute;top:10px;right:10px;z-index:2;width:38px;height:38px;border-radius:50%;border:1px solid var(--border);background:rgba(1,32,50,.9);color:var(--text);font-size:22px;line-height:1;cursor:pointer}
-.modal-close:hover{color:var(--accent);border-color:var(--accent)}
-
-.success-message{
-  position:fixed;
-  top:50%;left:50%;
-  transform:translate(-50%,-50%) scale(0.9);
-  background:var(--panel);
-  border:2px solid var(--accent);
-  border-radius:16px;
-  padding:40px 50px;
-  text-align:center;
-  z-index:200;
-  opacity:0;
-  pointer-events:none;
-  transition:opacity 0.4s ease, transform 0.4s ease;
-  box-shadow:0 20px 60px rgba(45,212,234,0.3);
-  max-width:90%;
-}
-.success-message.show{
-  opacity:1;
-  pointer-events:auto;
-  transform:translate(-50%,-50%) scale(1);
-}
-.success-message h3{
-  color:var(--gold);
-  font-size:24px;
-  margin-bottom:16px;
-}
-.success-message p{
-  color:var(--text);
-  font-size:16px;
-  line-height:1.6;
-}
-.success-close{
-  position:absolute;
-  top:10px;right:10px;
-  width:32px;height:32px;
-  border-radius:50%;
-  border:1px solid var(--border);
-  background:rgba(1,32,50,.9);
-  color:var(--text);
-  font-size:20px;
-  line-height:1;
-  cursor:pointer;
-  display:flex;align-items:center;justify-content:center;
-}
-.success-close:hover{color:var(--accent);border-color:var(--accent)}
-
-@media (prefers-reduced-motion: reduce){
-  .hero-bg img,.hero-content .eyebrow,.hero-content h1,.hero-content .tagline,.hero-content .lead{animation:none;opacity:1}
-  .hero-bg img{opacity:.5;-webkit-mask-image:none;mask-image:none}
-  .reveal{opacity:1;transform:none;transition:none}
-}
-</style>
+<link rel="stylesheet" href="styles.css">
 </head>
 <body>
 
 <nav class="nav">
   <div class="container">
-    <a class="nav-logo" href="#top"><img src="logo.png" alt="Сумма технологий"></a>
+    <a class="nav-logo" href="index.html"><img src="logo.png" alt="Сумма технологий"></a>
     <div class="nav-links">
-      <a href="#about">Идея</a>
-      <a href="#sections">Секции</a>
-      <a href="#program">Условия участия в семинаре</a>
-      <a href="#format">Формат</a>
-      <a href="#manifest">Манифест</a>
-      <a href="#register">Регистрация</a>
-      <a href="#contacts">Контакты</a>
+      <a href="index.html" class="active">Главная</a>
+      <a href="program.html">Программа</a>
+      <a href="manifest.html">Манифест</a>
+      <a href="contacts.html">Контакты</a>
     </div>
     <a href="#" data-open-form class="btn btn-primary">Участвовать</a>
   </div>
@@ -230,7 +38,7 @@ footer .container{display:flex;flex-direction:column;align-items:center;gap:12px
   <div class="container">
     <h2 class="reveal">Идея семинара</h2>
     <p class="section-sub reveal">Название — отсылка к трактату Станислава Лема «Summa Technologiae» (1964): там, где средневековый схоласт систематизировал божественное, Лем систематизирует технологическое. Семинар продолжает эту рамку: ИИ — не «гаджет», а следующий шаг логики развития сложных систем. Мы разбираем, где заканчивается наука и технология и начинается магия маркетинга, и обсуждаем модели будущего, состоятельность которых можно проверять.</p>
-    <a href="#manifest" class="btn btn-primary btn-sm reveal">Читать далее</a>
+    <a href="manifest.html" class="btn btn-primary btn-sm reveal">Читать далее</a>
   </div>
 </section>
 
@@ -312,63 +120,11 @@ footer .container{display:flex;flex-direction:column;align-items:center;gap:12px
   </div>
 </section>
 
-<section id="format">
-  <div class="section-bg"><img src="stars-4.jpg" alt=""></div>
-  <div class="container">
-    <h2 class="reveal">Формат</h2>
-    <ul class="plain reveal">
-      <li>Доклады: 3 на секцию по 15+15 минут или 4 по 10+10 (доклад/вопросы).</li>
-      <li>Трансляция не ведётся: формат предполагает закрытое обсуждение.</li>
-      <li>После семинара — пресс-релиз и публикации докладов.</li>
-    </ul>
-    <div class="tg-block reveal">
-      <h3>Телеграм-канал <a href="https://t.me/summa_tech_ai" target="_blank" rel="noopener">@summa_tech_ai</a></h3>
-      <p>Оперативные сведения о докладах, спикерах, тайминге и точном месте проведения семинара (1-й и 2-й дни могут быть проведены в разных местах — в зависимости от количества зарегистрировавшихся участников) можно получить в телеграм-канале <a href="https://t.me/summa_tech_ai" target="_blank" rel="noopener">@summa_tech_ai</a>. Подписывайтесь, чтобы иметь оперативную информацию.</p>
-      <p>Задать любой вопрос можно в письме или прямо в чате канала.</p>
-    </div>
-  </div>
-</section>
-
 <section id="register">
   <div class="container">
     <h2 class="reveal">Регистрация</h2>
     <p class="section-sub reveal">Заполните короткую анкету — мы свяжемся с вами для подтверждения участия и оплаты.</p>
     <a href="#" data-open-form class="btn btn-primary btn-xl reveal">Участвовать в семинаре</a>
-  </div>
-</section>
-
-<section id="manifest" class="manifest">
-  <div class="container">
-    <h2 class="reveal">Манифест семинара</h2>
-
-    <h3 class="reveal">Ещё в 60-х были люди, которые видели будущее.</h3>
-    <p class="reveal">В произведении Станислава Лема «Сумма технологий» описано не просто будущее технологий, а их слияние в единую среду, где человек перестаёт быть единственным субъектом. Сегодня это перестаёт быть метафорой: ИИ встроен в финансы, логистику, образование, творчество. Мы назвали семинар в честь этого произведения не ради красивой отсылки, а потому что считаем: разговор об ИИ должен начинаться с глубины, а не с очередного релиза. Мы хотим заглянуть туда же, куда смотрел Лем, — но с сегодняшним инструментарием и сегодняшними вопросами.</p>
-
-    <h3 class="reveal">Мы не конференция в обычном смысле. Мы — семинар с ежегодной конференцией.</h3>
-    <p class="reveal">Наш основной формат — ежеквартальные встречи по секциям, камерные, в приватной аудитории. Раз в год, в мае, мы собираем большую конференцию — но даже в этом масштабе мы остаёмся семинаром: не поток докладов, а пространство для разговора. Формат личного участия, а не «присутствия в зале».</p>
-
-    <h3 class="reveal">Практика — для себя, а не для отчёта.</h3>
-    <p class="reveal">Секция «Практика ИИ: от личного к бизнесу» учит запускать модели на своём железе, решать конкретные проблемы, настраивать приватных ассистентов. Это не «внедрение корпоративного решения», а навык, который остаётся с вами.</p>
-
-    <h3 class="reveal">Самое важное: мы говорим о воспитании и образовании детей.</h3>
-    <p class="reveal">Мы считаем это кардинально важным моментом, а не «темой для одной секции». Дети и подростки уже живут в мире, где ИИ встроен во всё — и то, как они научатся с ним обращаться, думать, спорить и не терять себя, определит не «будущее», а настоящее. Поэтому у нас есть отдельная молодёжная секция, и поэтому разговор о воспитании пронизывает весь семинар, а не выносится в угол.</p>
-
-    <h3 class="reveal">Цены рассчитаны на человека, а не на корпоративный бюджет.</h3>
-    <p class="reveal">Большинство крупных мероприятий ориентированы на то, что билет оплатит компания — отсюда и ценник, который не каждый решится заплатить из своего кармана. У нас иначе: мы хотим, чтобы думающий человек мог прийти сам, без «согласования бюджета» и без чувства, что платит за бренд, а не за содержание.</p>
-
-    <h3 class="reveal">Приватность вместо масштаба.</h3>
-    <p class="reveal">Большие конференции говорят с позиции индустрии: как внедрить, как масштабировать, как продать. Мы говорим иначе — с позиции мысли и смысла, а не рынка. В камерной аудитории возможен настоящий разговор: задать вопрос, поспорить, остаться после секции и продолжить обсуждение.</p>
-
-    <h3 class="reveal">Наша аудитория — думающие, самостоятельные люди.</h3>
-    <p class="reveal">Те, кто готов сомневаться, спорить и искать собственные ответы. А также те, кто ищет у ИИ реальной помощи и поддержки в своём деле — не «магического решения», а инструмента, который можно и нужно понять и приручить.</p>
-
-    <p class="reveal">Секция «Футурология, история, этика, риски» — полноценное направление, где обсуждаются вопросы, которые индустрия предпочитает обходить: чей это инструмент, кто контролирует «интегральный слой», что значит быть человеком в мире, где ИИ встроен во всё. Без цензуры — в рамках закона и уважения, но без оглядки на «неудобность» темы.</p>
-
-    <h3 class="reveal">Молодёжь — не «на будущее», а сейчас.</h3>
-    <p class="reveal">У нас есть отдельная молодёжная секция для 14–20 лет. Это принципиально: мы не читаем им лекции «про профессии будущего», а даём пространство, где они могут пробовать, ошибаться, спорить и находить свой язык для разговора с технологиями. Это не «профориентация», а воспитание самостоятельного мышления — то, без чего любая технология становится лишь инструментом послушания.</p>
-
-    <h3 class="reveal">Мы оставляем канал для взаимопомощи.</h3>
-    <p class="reveal">Тем, для кого эта тема жизненно важна, мы даём не только сцену, но и пространство для поддержки: обмен опытом, ответы на вопросы, помощь в сложных ситуациях. Это не «нетворкинг ради контактов», а сообщество людей, которым действительно интересно и важно разбираться в ИИ вместе.</p>
   </div>
 </section>
 
@@ -417,82 +173,6 @@ footer .container{display:flex;flex-direction:column;align-items:center;gap:12px
   <p>Ваше заявление на участие в семинаре приняли.<br>Свяжемся с Вами в ближайшее время.</p>
 </div>
 
-<script>
-(function(){
-  function toTop(){
-    if (location.hash) return;
-    var sb = document.documentElement.style.scrollBehavior;
-    document.documentElement.style.scrollBehavior = 'auto';
-    window.scrollTo(0, 0);
-    document.documentElement.style.scrollBehavior = sb || '';
-  }
-  toTop();
-  window.addEventListener('load', toTop);
-  window.addEventListener('pageshow', function(e){ if (e.persisted) toTop(); });
-
-  var FORM_URL = 'https://forms.yandex.ru/u/6ac20eb91f1eb51bc88cc4bd/';
-  var modal = document.getElementById('form-modal');
-  var frame = document.getElementById('form-frame');
-  var formCloseBtn = document.getElementById('form-close');
-  var successMsg = document.getElementById('success-message');
-  var successCloseBtn = document.getElementById('success-close');
-  var showSuccessTimer = null;
-
-  function openForm(e){
-    e.preventDefault();
-    frame.src = FORM_URL;
-    modal.classList.add('open');
-    modal.setAttribute('aria-hidden','false');
-    document.body.style.overflow = 'hidden';
-  }
-
-  function closeForm(){
-    modal.classList.remove('open');
-    modal.setAttribute('aria-hidden','true');
-    frame.removeAttribute('src');
-    document.body.style.overflow = '';
-    showSuccessTimer = setTimeout(function(){
-      successMsg.classList.add('show');
-    }, 3000);
-  }
-
-  function closeSuccess(){
-    if (showSuccessTimer) {
-      clearTimeout(showSuccessTimer);
-      showSuccessTimer = null;
-    }
-    successMsg.classList.remove('show');
-  }
-
-  var triggers = document.querySelectorAll('[data-open-form]');
-  for (var i = 0; i < triggers.length; i++) triggers[i].addEventListener('click', openForm);
-  formCloseBtn.addEventListener('click', closeForm);
-  modal.addEventListener('click', function(e){ if (e.target === modal) closeForm(); });
-  successCloseBtn.addEventListener('click', closeSuccess);
-  successMsg.addEventListener('click', function(e){ if (e.target === successMsg) closeSuccess(); });
-  document.addEventListener('keydown', function(e){
-    if (e.key === 'Escape') {
-      if (successMsg.classList.contains('show')) closeSuccess();
-      else if (modal.classList.contains('open')) closeForm();
-    }
-  });
-
-  var els = document.querySelectorAll('.reveal');
-  if (!('IntersectionObserver' in window)) {
-    for (var j = 0; j < els.length; j++) els[j].classList.add('visible');
-    return;
-  }
-  var io = new IntersectionObserver(function(entries){
-    entries.forEach(function(en){
-      if (en.isIntersecting) {
-        en.target.classList.add('visible');
-        io.unobserve(en.target);
-      }
-    });
-  }, {threshold:.15, rootMargin:'0px 0px -40px 0px'});
-  for (var j = 0; j < els.length; j++) io.observe(els[j]);
-})();
-</script>
-
+<script src="script.js"></script>
 </body>
 </html>
