@@ -69,6 +69,7 @@ h1{font-size:clamp(42px,7vw,76px);color:var(--gold);font-weight:700;line-height:
 .btn-primary{background:linear-gradient(90deg,var(--accent),#3b82f6);color:#041018;box-shadow:0 6px 24px rgba(45,212,234,.25)}
 .btn-primary:hover{transform:translateY(-2px);box-shadow:0 10px 30px rgba(45,212,234,.35)}
 .btn-xl{padding:18px 46px;font-size:18px}
+.btn-sm{padding:10px 24px;font-size:14px}
 section{padding:70px 0;position:relative}
 section > .container{position:relative;z-index:1}
 section::before{
@@ -97,12 +98,23 @@ h2{color:var(--gold);font-size:clamp(26px,4vw,34px);margin-bottom:14px}
 .card p{color:var(--muted);font-size:15px}
 .card .amount{font-size:30px;color:var(--gold);font-weight:700;margin:6px 0}
 .card .note{font-size:13px;color:var(--muted)}
+.card .slogan{color:var(--accent);font-style:italic;font-size:14px;margin-top:10px}
 ul.plain{list-style:none}
 ul.plain li{padding:8px 0 8px 26px;position:relative;color:var(--muted)}
 ul.plain li::before{content:"▸";color:var(--accent);position:absolute;left:4px}
 #program ul.plain li,#format ul.plain li{color:var(--gold);text-shadow:0 1px 12px rgba(0,0,0,.8)}
 #register{background:linear-gradient(180deg,transparent,rgba(45,212,234,.05));text-align:center}
 #register .section-sub{margin:0 auto 30px;text-align:center}
+
+.manifest{background:rgba(6,42,64,.35)}
+.manifest h3{color:var(--accent);font-size:18px;margin:26px 0 8px}
+.manifest p{color:var(--muted);font-size:16px;max-width:820px}
+
+.tg-block{margin-top:26px;background:var(--panel);border:1px solid var(--border);border-radius:14px;padding:24px;text-align:left}
+.tg-block h3{color:var(--accent);font-size:18px;margin-bottom:10px}
+.tg-block p{color:var(--muted);font-size:15px}
+.tg-block a{color:var(--accent)}
+
 footer{padding:40px 0;border-top:1px solid var(--border);color:var(--muted);text-align:center;font-size:14px}
 footer .container{display:flex;flex-direction:column;align-items:center;gap:12px}
 .footer-contacts{display:flex;justify-content:center;gap:14px;flex-wrap:wrap}
@@ -116,12 +128,14 @@ footer .container{display:flex;flex-direction:column;align-items:center;gap:12px
 .contact-btn:hover{color:var(--gold);border-color:var(--accent);transform:translateY(-2px);box-shadow:0 6px 18px rgba(45,212,234,.25)}
 .contact-btn svg{width:22px;height:22px;fill:currentColor}
 .contact-btn .max-label{font-weight:700;font-size:11px;letter-spacing:.06em}
+.patrons{margin-top:14px}
+.patrons-title{color:var(--gold);font-size:15px;margin-bottom:10px}
+.patrons-list{list-style:none;color:var(--muted);font-size:14px;display:flex;flex-direction:column;gap:4px}
 .footer-note{color:var(--text);font-size:14px}
 .footer-note a{color:var(--accent);text-decoration:none}
 .footer-note a:hover{color:var(--gold)}
 .footer-line{color:var(--gold)}
 
-/* Модалка с формой */
 .modal{position:fixed;inset:0;z-index:100;display:none;align-items:center;justify-content:center;background:rgba(1,20,32,.82);backdrop-filter:blur(4px);padding:20px}
 .modal.open{display:flex}
 .modal-box{position:relative;width:min(760px,100%);height:min(86vh,920px);background:var(--panel);border:1px solid var(--border);border-radius:16px;overflow:hidden;box-shadow:0 20px 60px rgba(0,0,0,.5)}
@@ -129,7 +143,6 @@ footer .container{display:flex;flex-direction:column;align-items:center;gap:12px
 .modal-close{position:absolute;top:10px;right:10px;z-index:2;width:38px;height:38px;border-radius:50%;border:1px solid var(--border);background:rgba(1,32,50,.9);color:var(--text);font-size:22px;line-height:1;cursor:pointer}
 .modal-close:hover{color:var(--accent);border-color:var(--accent)}
 
-/* Сообщение после отправки */
 .success-message{
   position:fixed;
   top:50%;left:50%;
@@ -193,6 +206,7 @@ footer .container{display:flex;flex-direction:column;align-items:center;gap:12px
       <a href="#sections">Секции</a>
       <a href="#program">Условия участия в семинаре</a>
       <a href="#format">Формат</a>
+      <a href="#manifest">Манифест</a>
       <a href="#register">Регистрация</a>
       <a href="#contacts">Контакты</a>
     </div>
@@ -216,13 +230,14 @@ footer .container{display:flex;flex-direction:column;align-items:center;gap:12px
   <div class="container">
     <h2 class="reveal">Идея семинара</h2>
     <p class="section-sub reveal">Название — отсылка к трактату Станислава Лема «Summa Technologiae» (1964): там, где средневековый схоласт систематизировал божественное, Лем систематизирует технологическое. Семинар продолжает эту рамку: ИИ — не «гаджет», а следующий шаг логики развития сложных систем. Мы разбираем, где заканчивается наука и технология и начинается магия маркетинга, и обсуждаем модели будущего, состоятельность которых можно проверять.</p>
+    <a href="#manifest" class="btn btn-primary btn-sm reveal">Читать далее</a>
   </div>
 </section>
 
 <section id="sections">
   <div class="section-bg"><img src="stars-2.jpg" alt=""></div>
   <div class="container">
-    <h2 class="reveal">Четыре секции</h2>
+    <h2 class="reveal">Секции семинара</h2>
     <div class="grid">
       <div class="card card--media reveal">
         <img src="section-1.jpg" alt="Научно-техническая база ИИ">
@@ -232,9 +247,9 @@ footer .container{display:flex;flex-direction:column;align-items:center;gap:12px
         </div>
       </div>
       <div class="card card--media reveal">
-        <img src="section-2.jpg" alt="Практическая лаборатория личного ИИ">
+        <img src="section-2.jpg" alt="Лаборатория прикладного ИИ">
         <div class="card-body">
-          <h3>2. Практическая лаборатория личного ИИ</h3>
+          <h3>2. Лаборатория прикладного ИИ</h3>
           <p>Запуск локальных моделей (Llama, Mistral, Qwen), приватные ассистенты, автоматизация задач. Только рабочие инструменты.</p>
         </div>
       </div>
@@ -249,8 +264,13 @@ footer .container{display:flex;flex-direction:column;align-items:center;gap:12px
         <img src="section-4.jpg" alt="Футурология, история, этика, риски">
         <div class="card-body">
           <h3>4. Футурология, история, этика, риски</h3>
-          <p>От «Голема» и «Франкенштейна» до корпоративных войн за AGI: сингулярность, безработица, цензура, автономные агенты. Академично, без «инопланетян».</p>
+          <p>От «Голема» и «Франкенштейна» до корпоративных войн за AGI: сингулярность, безработица, цензура, автономные агенты. Академично, без лишней истерики.</p>
         </div>
+      </div>
+      <div class="card reveal">
+        <h3>5. Молодёжная секция</h3>
+        <p>Для участников 14–20 лет.</p>
+        <p class="slogan">— для тех, кто не хочет, чтобы за него решали, каким будет его будущее.</p>
       </div>
     </div>
   </div>
@@ -276,15 +296,15 @@ footer .container{display:flex;flex-direction:column;align-items:center;gap:12px
       <div class="card reveal">
         <h3>Пакет на оба дня</h3>
         <p>Полная программа двух дней семинара.</p>
-        <div class="amount">3500 ₽</div>
-        <p class="note">Выгода 500 ₽</p>
+        <div class="amount">2500 ₽</div>
+        <p class="note">Выгода 1500 ₽</p>
       </div>
     </div>
     <ul class="plain reveal" style="margin-top:22px">
       <li>До 20 лет — бесплатно, по билету.</li>
-      <li>Круглые столы — отдельный билет.</li>
       <li>Обед/ужин — за небольшую доплату.</li>
-      <li>Ранние продажи — за 1,5–2 месяца до семинара.</li>
+      <li>Афтепати — за дополнительный взнос.</li>
+      <li>Донаты приветствуются!</li>
     </ul>
   </div>
 </section>
@@ -295,10 +315,14 @@ footer .container{display:flex;flex-direction:column;align-items:center;gap:12px
     <h2 class="reveal">Формат</h2>
     <ul class="plain reveal">
       <li>Доклады: 3 на секцию по 15+15 минут или 4 по 10+10 (доклад/вопросы).</li>
-      <li>Платная трансляция, запись с нарезкой докладов, мерч.</li>
-      <li>Флешка с офлайн-моделью-помощником и RAG-оцифровка докладов.</li>
+      <li>Трансляция не ведётся: формат предполагает закрытое обсуждение.</li>
       <li>После семинара — пресс-релиз и публикации докладов.</li>
     </ul>
+    <div class="tg-block reveal">
+      <h3>Телеграм-канал <a href="https://t.me/summa_tech_ai" target="_blank" rel="noopener">@summa_tech_ai</a></h3>
+      <p>Оперативные сведения о докладах, спикерах, тайминге и точном месте проведения семинара (1-й и 2-й дни могут быть проведены в разных местах — в зависимости от количества зарегистрировавшихся участников) можно получить в телеграм-канале <a href="https://t.me/summa_tech_ai" target="_blank" rel="noopener">@summa_tech_ai</a>. Подписывайтесь, чтобы иметь оперативную информацию.</p>
+      <p>Задать любой вопрос можно в письме или прямо в чате канала.</p>
+    </div>
   </div>
 </section>
 
@@ -310,10 +334,45 @@ footer .container{display:flex;flex-direction:column;align-items:center;gap:12px
   </div>
 </section>
 
+<section id="manifest" class="manifest">
+  <div class="container">
+    <h2 class="reveal">Манифест семинара</h2>
+
+    <h3 class="reveal">Ещё в 60-х были люди, которые видели будущее.</h3>
+    <p class="reveal">В произведении Станислава Лема «Сумма технологий» описано не просто будущее технологий, а их слияние в единую среду, где человек перестаёт быть единственным субъектом. Сегодня это перестаёт быть метафорой: ИИ встроен в финансы, логистику, образование, творчество. Мы назвали семинар в честь этого произведения не ради красивой отсылки, а потому что считаем: разговор об ИИ должен начинаться с глубины, а не с очередного релиза. Мы хотим заглянуть туда же, куда смотрел Лем, — но с сегодняшним инструментарием и сегодняшними вопросами.</p>
+
+    <h3 class="reveal">Мы не конференция в обычном смысле. Мы — семинар с ежегодной конференцией.</h3>
+    <p class="reveal">Наш основной формат — ежеквартальные встречи по секциям, камерные, в приватной аудитории. Раз в год, в мае, мы собираем большую конференцию — но даже в этом масштабе мы остаёмся семинаром: не поток докладов, а пространство для разговора. Формат личного участия, а не «присутствия в зале».</p>
+
+    <h3 class="reveal">Практика — для себя, а не для отчёта.</h3>
+    <p class="reveal">Секция «Практика ИИ: от личного к бизнесу» учит запускать модели на своём железе, решать конкретные проблемы, настраивать приватных ассистентов. Это не «внедрение корпоративного решения», а навык, который остаётся с вами.</p>
+
+    <h3 class="reveal">Самое важное: мы говорим о воспитании и образовании детей.</h3>
+    <p class="reveal">Мы считаем это кардинально важным моментом, а не «темой для одной секции». Дети и подростки уже живут в мире, где ИИ встроен во всё — и то, как они научатся с ним обращаться, думать, спорить и не терять себя, определит не «будущее», а настоящее. Поэтому у нас есть отдельная молодёжная секция, и поэтому разговор о воспитании пронизывает весь семинар, а не выносится в угол.</p>
+
+    <h3 class="reveal">Цены рассчитаны на человека, а не на корпоративный бюджет.</h3>
+    <p class="reveal">Большинство крупных мероприятий ориентированы на то, что билет оплатит компания — отсюда и ценник, который не каждый решится заплатить из своего кармана. У нас иначе: мы хотим, чтобы думающий человек мог прийти сам, без «согласования бюджета» и без чувства, что платит за бренд, а не за содержание.</p>
+
+    <h3 class="reveal">Приватность вместо масштаба.</h3>
+    <p class="reveal">Большие конференции говорят с позиции индустрии: как внедрить, как масштабировать, как продать. Мы говорим иначе — с позиции мысли и смысла, а не рынка. В камерной аудитории возможен настоящий разговор: задать вопрос, поспорить, остаться после секции и продолжить обсуждение.</p>
+
+    <h3 class="reveal">Наша аудитория — думающие, самостоятельные люди.</h3>
+    <p class="reveal">Те, кто готов сомневаться, спорить и искать собственные ответы. А также те, кто ищет у ИИ реальной помощи и поддержки в своём деле — не «магического решения», а инструмента, который можно и нужно понять и приручить.</p>
+
+    <p class="reveal">Секция «Футурология, история, этика, риски» — полноценное направление, где обсуждаются вопросы, которые индустрия предпочитает обходить: чей это инструмент, кто контролирует «интегральный слой», что значит быть человеком в мире, где ИИ встроен во всё. Без цензуры — в рамках закона и уважения, но без оглядки на «неудобность» темы.</p>
+
+    <h3 class="reveal">Молодёжь — не «на будущее», а сейчас.</h3>
+    <p class="reveal">У нас есть отдельная молодёжная секция для 14–20 лет. Это принципиально: мы не читаем им лекции «про профессии будущего», а даём пространство, где они могут пробовать, ошибаться, спорить и находить свой язык для разговора с технологиями. Это не «профориентация», а воспитание самостоятельного мышления — то, без чего любая технология становится лишь инструментом послушания.</p>
+
+    <h3 class="reveal">Мы оставляем канал для взаимопомощи.</h3>
+    <p class="reveal">Тем, для кого эта тема жизненно важна, мы даём не только сцену, но и пространство для поддержки: обмен опытом, ответы на вопросы, помощь в сложных ситуациях. Это не «нетворкинг ради контактов», а сообщество людей, которым действительно интересно и важно разбираться в ИИ вместе.</p>
+  </div>
+</section>
+
 <footer id="contacts">
   <div class="container">
     <div class="footer-contacts">
-      <a class="contact-btn" href="https://t.me/" target="_blank" rel="noopener" aria-label="Телеграм" title="Телеграм">
+      <a class="contact-btn" href="https://t.me/summa_tech_ai" target="_blank" rel="noopener" aria-label="Телеграм" title="Телеграм">
         <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></svg>
       </a>
       <a class="contact-btn" href="https://max.ru/" target="_blank" rel="noopener" aria-label="MAX" title="MAX">
@@ -326,12 +385,22 @@ footer .container{display:flex;flex-direction:column;align-items:center;gap:12px
         <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
       </a>
     </div>
+    <div class="patrons">
+      <p class="patrons-title">Деятельность семинара проходит под патронажем:</p>
+      <ul class="patrons-list">
+        <li>Траектория смысла</li>
+        <li>Школа складности «Русло»</li>
+        <li>ООО Консалт-МИТ</li>
+        <li>Твои Традиции</li>
+        <li>Фонд Эйлера</li>
+        <li>Крейт</li>
+      </ul>
+    </div>
     <p class="footer-note"><a href="tel:+78127164674">+7 (812) 71-646-74</a> · <a href="mailto:kedrpiter@ya.ru">kedrpiter@ya.ru</a></p>
-    <p class="footer-line">Семинар «Сумма технологий» · Санкт-Петербург, Васильевский остров · 24–25 октября</p>
+    <p class="footer-line">Семинар «Сумма технологий» · Санкт-Петербург, Уральская 1Ю · 24–25 октября</p>
   </div>
 </footer>
 
-<!-- Модалка с формой Яндекс -->
 <div class="modal" id="form-modal" aria-hidden="true">
   <div class="modal-box">
     <button class="modal-close" id="form-close" aria-label="Закрыть">×</button>
@@ -339,7 +408,6 @@ footer .container{display:flex;flex-direction:column;align-items:center;gap:12px
   </div>
 </div>
 
-<!-- Сообщение после отправки -->
 <div class="success-message" id="success-message">
   <button class="success-close" id="success-close" aria-label="Закрыть">×</button>
   <h3>✓ Заявление принято</h3>
@@ -380,7 +448,6 @@ footer .container{display:flex;flex-direction:column;align-items:center;gap:12px
     modal.setAttribute('aria-hidden','true');
     frame.removeAttribute('src');
     document.body.style.overflow = '';
-    // Через 3 секунды показать сообщение
     showSuccessTimer = setTimeout(function(){
       successMsg.classList.add('show');
     }, 3000);
