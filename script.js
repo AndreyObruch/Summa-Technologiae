@@ -16,44 +16,63 @@
   var formCloseBtn = document.getElementById('form-close');
   var successMsg = document.getElementById('success-message');
   var successCloseBtn = document.getElementById('success-close');
-  var showSuccessTimer = null;
+
+  var modalOpen = false;
+  var frameLoads = 0;
+  var formSubmitted = false;
+  var autoTimer = null;
+
+  // Первая загрузка iframe — анкета. Вторая (после отправки) — страница «отправлено».
+  frame.onload = function(){
+    if (!modalOpen) return;
+    frameLoads++;
+    if (frameLoads > 1) {
+      formSubmitted = true;
+      if (!autoTimer) {
+        autoTimer = setTimeout(function(){ finish(true); }, 3000);
+      }
+    }
+  };
 
   function openForm(e){
     e.preventDefault();
+    modalOpen = true;
+    frameLoads = 0;
+    formSubmitted = false;
+    autoTimer = null;
     frame.src = FORM_URL;
     modal.classList.add('open');
     modal.setAttribute('aria-hidden','false');
     document.body.style.overflow = 'hidden';
   }
 
-  function closeForm(){
+  function finish(showSuccess){
+    if (autoTimer) {
+      clearTimeout(autoTimer);
+      autoTimer = null;
+    }
+    modalOpen = false;
     modal.classList.remove('open');
     modal.setAttribute('aria-hidden','true');
     frame.removeAttribute('src');
     document.body.style.overflow = '';
-    showSuccessTimer = setTimeout(function(){
-      successMsg.classList.add('show');
-    }, 3000);
+    if (showSuccess) successMsg.classList.add('show');
   }
 
   function closeSuccess(){
-    if (showSuccessTimer) {
-      clearTimeout(showSuccessTimer);
-      showSuccessTimer = null;
-    }
     successMsg.classList.remove('show');
   }
 
   var triggers = document.querySelectorAll('[data-open-form]');
   for (var i = 0; i < triggers.length; i++) triggers[i].addEventListener('click', openForm);
-  formCloseBtn.addEventListener('click', closeForm);
-  modal.addEventListener('click', function(e){ if (e.target === modal) closeForm(); });
+  formCloseBtn.addEventListener('click', function(){ finish(formSubmitted); });
+  modal.addEventListener('click', function(e){ if (e.target === modal) finish(formSubmitted); });
   successCloseBtn.addEventListener('click', closeSuccess);
   successMsg.addEventListener('click', function(e){ if (e.target === successMsg) closeSuccess(); });
   document.addEventListener('keydown', function(e){
     if (e.key === 'Escape') {
       if (successMsg.classList.contains('show')) closeSuccess();
-      else if (modal.classList.contains('open')) closeForm();
+      else if (modal.classList.contains('open')) finish(formSubmitted);
     }
   });
 
