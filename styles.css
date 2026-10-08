@@ -1,6 +1,7 @@
 :root{
   --bg:#012032; --panel:#062a40; --text:#e6edf7; --muted:#9fb0c7;
   --accent:#2dd4ea; --gold:#f0b429; --border:rgba(255,255,255,.08);
+  --navy:#002140;
   --crop-top:300px;
   --crop-bottom:150px;
 }
@@ -8,14 +9,21 @@
 html{scroll-behavior:smooth}
 body{font-family:'Segoe UI',system-ui,-apple-system,sans-serif;background:var(--bg);color:var(--text);line-height:1.6}
 .container{max-width:1040px;margin:0 auto;padding:0 20px}
-.nav{position:sticky;top:0;z-index:20;background:rgba(1,32,50,.92);backdrop-filter:blur(8px);border-bottom:1px solid var(--border)}
+.nav{position:sticky;top:0;z-index:20;background:rgba(0,33,64,.96);backdrop-filter:blur(8px);border-bottom:1px solid rgba(240,180,41,.25)}
 .nav .container{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:10px 20px;flex-wrap:wrap}
 .nav-logo{display:block;text-decoration:none}
 .nav-logo img{height:44px;width:auto;display:block;border-radius:8px}
-.nav-links{display:flex;gap:22px;flex-wrap:wrap;align-items:center}
-.nav-links a{color:var(--muted);text-decoration:none;font-size:14px;transition:color .15s}
-.nav-links a:hover{color:var(--accent)}
-.nav-links a.active{color:var(--accent);font-weight:600}
+.nav-links{display:flex;gap:14px;flex-wrap:wrap;align-items:center}
+.nav-links a{
+  color:var(--muted);text-decoration:none;font-size:14px;
+  padding:8px 16px;
+  border:1px solid rgba(240,180,41,.55);
+  border-radius:999px;
+  box-shadow:0 0 10px rgba(240,180,41,.28);
+  transition:color .15s, border-color .15s, box-shadow .15s;
+}
+.nav-links a:hover{color:var(--accent);border-color:rgba(240,180,41,.9);box-shadow:0 0 14px rgba(240,180,41,.45)}
+.nav-links a.active{color:var(--accent);font-weight:600;border-color:rgba(240,180,41,.9);box-shadow:0 0 14px rgba(240,180,41,.45)}
 .nav .btn{padding:9px 18px;font-size:14px}
 
 header.hero{
@@ -111,7 +119,7 @@ ul.plain li::before{content:"▸";color:var(--accent);position:absolute;left:4px
 .tg-block p{color:var(--muted);font-size:15px}
 .tg-block a{color:var(--accent)}
 
-footer{padding:40px 0;border-top:1px solid var(--border);color:var(--muted);text-align:center;font-size:14px}
+footer{padding:40px 0;border-top:1px solid rgba(240,180,41,.25);color:var(--muted);text-align:center;font-size:14px;background:var(--navy)}
 footer .container{display:flex;flex-direction:column;align-items:center;gap:12px}
 .footer-contacts{display:flex;justify-content:center;gap:14px;flex-wrap:wrap}
 .contact-btn{
