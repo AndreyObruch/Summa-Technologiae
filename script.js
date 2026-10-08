@@ -10,6 +10,60 @@
   window.addEventListener('load', toTop);
   window.addEventListener('pageshow', function(e){ if (e.persisted) toTop(); });
 
+  var isMobile = (/Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent))
+    || (navigator.maxTouchPoints > 0 && window.matchMedia && window.matchMedia('(pointer: coarse)').matches);
+
+  var toastEl = null, toastTimer = null;
+  function showToast(msg){
+    if (!toastEl){
+      toastEl = document.createElement('div');
+      toastEl.setAttribute('role','status');
+      toastEl.style.cssText = 'position:fixed;left:50%;bottom:28px;transform:translateX(-50%) translateY(20px);background:#002140;border:1px solid rgba(240,180,41,.6);color:#e6edf7;padding:14px 22px;border-radius:12px;font-size:15px;z-index:300;box-shadow:0 8px 30px rgba(0,0,0,.45);opacity:0;transition:opacity .3s ease,transform .3s ease;max-width:90%;text-align:center;pointer-events:none;';
+      document.body.appendChild(toastEl);
+    }
+    toastEl.textContent = msg;
+    requestAnimationFrame(function(){
+      toastEl.style.opacity = '1';
+      toastEl.style.transform = 'translateX(-50%) translateY(0)';
+    });
+    if (toastTimer) clearTimeout(toastTimer);
+    toastTimer = setTimeout(function(){
+      toastEl.style.opacity = '0';
+      toastEl.style.transform = 'translateX(-50%) translateY(20px)';
+    }, 2600);
+  }
+
+  function copyText(text, cb){
+    function fallback(){
+      try{
+        var ta = document.createElement('textarea');
+        ta.value = text; ta.style.position = 'fixed'; ta.style.opacity = '0';
+        document.body.appendChild(ta); ta.focus(); ta.select();
+        var ok = document.execCommand('copy');
+        document.body.removeChild(ta); cb(ok);
+      } catch(err){ cb(false); }
+    }
+    if (navigator.clipboard && navigator.clipboard.writeText){
+      navigator.clipboard.writeText(text).then(function(){ cb(true); }, fallback);
+    } else { fallback(); }
+  }
+
+  document.addEventListener('click', function(e){
+    var btn = e.target.closest ? e.target.closest('.contact-btn') : null;
+    if (!btn) return;
+    var href = btn.getAttribute('href') || '';
+    var isTel = href.indexOf('tel:') === 0;
+    var isMail = href.indexOf('mailto:') === 0;
+    if (!isTel && !isMail) return;
+    if (isMobile) return;
+    e.preventDefault();
+    var raw = href.replace(/^tel:/,'').replace(/^mailto:/,'');
+    var label = isTel ? '+7 (812) 71-646-74' : raw;
+    copyText(raw, function(ok){
+      showToast(ok ? ('Скопировано: ' + label) : ('Скопируйте вручную: ' + label));
+    });
+  });
+
   var FORM_URL = 'https://forms.yandex.ru/u/6ac20eb91f1eb51bc88cc4bd/';
   var modal = document.getElementById('form-modal');
   var frame = document.getElementById('form-frame');
@@ -22,7 +76,6 @@
   var formSubmitted = false;
   var autoTimer = null;
 
-  // Первая загрузка iframe — анкета. Вторая (после отправки) — страница «отправлено».
   frame.onload = function(){
     if (!modalOpen) return;
     frameLoads++;
@@ -47,10 +100,7 @@
   }
 
   function finish(showSuccess){
-    if (autoTimer) {
-      clearTimeout(autoTimer);
-      autoTimer = null;
-    }
+    if (autoTimer) { clearTimeout(autoTimer); autoTimer = null; }
     modalOpen = false;
     modal.classList.remove('open');
     modal.setAttribute('aria-hidden','true');
