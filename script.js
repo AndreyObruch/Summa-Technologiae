@@ -11,7 +11,7 @@
   window.addEventListener('pageshow', function(e){ if (e.persisted) toTop(); });
 
   var FORM_URL = 'https://forms.yandex.ru/u/6ac20eb91f1eb51bc88cc4bd/';
-  var SUBMIT_MIN = 8000;
+  var GAP = 2500, LOAD_GUARD = 8000;
 
   var isMobile = (/Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent))
     || (navigator.maxTouchPoints > 0 && window.matchMedia && window.matchMedia('(pointer: coarse)').matches);
@@ -57,9 +57,8 @@
   var successMsg = document.getElementById('success-message');
   var successCloseBtn = document.getElementById('success-close');
 
-  var modalOpen = false, formSubmitted = false, openedAt = 0;
+  var modalOpen = false, formSubmitted = false, openedAt = 0, lastMsgAt = 0;
 
-  function ready(){ return modalOpen && (Date.now() - openedAt > SUBMIT_MIN); }
   function finish(showSuccess){
     modalOpen = false;
     if (modal){ modal.classList.remove('open'); modal.setAttribute('aria-hidden','true'); }
@@ -70,7 +69,7 @@
   function submitted(){ if (formSubmitted) return; formSubmitted = true; finish(true); }
 
   if (modal && frame && formCloseBtn){
-    frame.onload = function(){ if (ready()) submitted(); };
+    frame.onload = function(){ if (modalOpen && Date.now() - openedAt > LOAD_GUARD) submitted(); };
     formCloseBtn.addEventListener('click', function(){ finish(formSubmitted); });
     modal.addEventListener('click', function(e){ if (e.target === modal) finish(formSubmitted); });
     document.addEventListener('keydown', function(e){
@@ -83,17 +82,19 @@
   if (successMsg) successMsg.addEventListener('click', function(e){ if (e.target === successMsg) successMsg.classList.remove('show'); });
 
   window.addEventListener('message', function(ev){
-    if (!ready()) return;
-    if (ev.origin !== 'https://forms.yandex.ru' && ev.origin !== 'https://forms.yandex.net') return;
-    var d = ev.data;
-    if (!d || typeof d !== 'object') return;
-    if ('height' in d || d.type === 'resize' || d.event === 'resize') return;
-    submitted();
+    if (!modalOpen || formSubmitted) return;
+    var o = ev.origin;
+    if (o !== 'https://forms.yandex.ru' && o !== 'https://forms.yandex.net') return;
+    var now = Date.now();
+    var gap = now - lastMsgAt;
+    lastMsgAt = now;
+    if (gap > GAP && now - openedAt > LOAD_GUARD) submitted();
   });
 
   function openForm(){
     if (!modal || !frame) return;
-    modalOpen = true; formSubmitted = false; openedAt = Date.now();
+    modalOpen = true; formSubmitted = false;
+    openedAt = Date.now(); lastMsgAt = openedAt;
     frame.src = FORM_URL;
     modal.classList.add('open');
     modal.setAttribute('aria-hidden','false');
