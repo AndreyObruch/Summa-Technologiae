@@ -50,11 +50,67 @@
     } else { fallback(); }
   }
 
+  // ---- окно "Заявка принята" после редиректа с анкеты (?thanks=1 или #thanks) ----
+  var successMsg = document.getElementById('success-message');
+  var successCloseBtn = document.getElementById('success-close');
+  var thanksOpen = false;
+
+  function hasThanks(){
+    if (location.hash === '#thanks') return true;
+    var q = location.search.replace(/^\?/, '');
+    if (!q) return false;
+    var parts = q.split('&');
+    for (var i = 0; i < parts.length; i++){
+      if (parts[i] === 'thanks=1' || parts[i] === 'thanks') return true;
+    }
+    return false;
+  }
+  function cleanUrl(){
+    try{
+      if (!history.replaceState) return;
+      var q = location.search.replace(/^\?/, '');
+      var parts = q ? q.split('&') : [];
+      var keep = [];
+      for (var i = 0; i < parts.length; i++){
+        if (parts[i] && parts[i].indexOf('thanks=') !== 0 && parts[i] !== 'thanks') keep.push(parts[i]);
+      }
+      var newSearch = keep.length ? ('?' + keep.join('&')) : '';
+      var newHash = (location.hash === '#thanks') ? '' : location.hash;
+      history.replaceState(null, '', location.pathname + newSearch + newHash);
+    } catch(e){}
+  }
+  function showThanks(){
+    if (!successMsg) return;
+    successMsg.classList.add('show');
+    thanksOpen = true;
+  }
+  function closeThanks(){
+    if (!successMsg) return;
+    successMsg.classList.remove('show');
+    thanksOpen = false;
+    cleanUrl();
+  }
+
+  if (hasThanks()){
+    setTimeout(showThanks, 150);
+  }
+  if (successCloseBtn) successCloseBtn.addEventListener('click', closeThanks);
+  if (successMsg) successMsg.addEventListener('click', function(e){ if (e.target === successMsg) closeThanks(); });
+  document.addEventListener('mousedown', function(e){
+    if (!thanksOpen || !successMsg) return;
+    if (successMsg.contains(e.target)) return;
+    closeThanks();
+  });
+  document.addEventListener('keydown', function(e){
+    if (e.key === 'Escape' && thanksOpen) closeThanks();
+  });
+
+  // ---- клики: открыть анкету / скопировать контакт ----
   document.addEventListener('click', function(e){
     var trigger = e.target.closest ? e.target.closest('[data-open-form]') : null;
     if (trigger){
       e.preventDefault();
-      window.open(FORM_URL, '_blank');
+      location.href = FORM_URL;
       return;
     }
     var btn = e.target.closest ? e.target.closest('.contact-btn') : null;
