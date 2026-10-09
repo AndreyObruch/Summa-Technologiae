@@ -11,6 +11,7 @@
   window.addEventListener('pageshow', function(e){ if (e.persisted) toTop(); });
 
   var FORM_URL = 'https://forms.yandex.ru/u/6ac20eb91f1eb51bc88cc4bd/';
+  var SUBMIT_MIN = 8000;
 
   var isMobile = (/Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent))
     || (navigator.maxTouchPoints > 0 && window.matchMedia && window.matchMedia('(pointer: coarse)').matches);
@@ -56,29 +57,20 @@
   var successMsg = document.getElementById('success-message');
   var successCloseBtn = document.getElementById('success-close');
 
-  var modalOpen = false, frameLoads = 0, formSubmitted = false, autoTimer = null, openedAt = 0;
+  var modalOpen = false, formSubmitted = false, openedAt = 0;
 
+  function ready(){ return modalOpen && (Date.now() - openedAt > SUBMIT_MIN); }
   function finish(showSuccess){
-    if (autoTimer){ clearTimeout(autoTimer); autoTimer = null; }
     modalOpen = false;
-    if (modal) modal.classList.remove('open');
-    if (modal) modal.setAttribute('aria-hidden','true');
+    if (modal){ modal.classList.remove('open'); modal.setAttribute('aria-hidden','true'); }
     if (frame) frame.removeAttribute('src');
     document.body.style.overflow = '';
     if (showSuccess && successMsg) successMsg.classList.add('show');
   }
-  function submitted(){
-    if (formSubmitted) return;
-    formSubmitted = true;
-    finish(true);
-  }
+  function submitted(){ if (formSubmitted) return; formSubmitted = true; finish(true); }
 
   if (modal && frame && formCloseBtn){
-    frame.onload = function(){
-      if (!modalOpen) return;
-      frameLoads++;
-      if (frameLoads > 1) submitted();
-    };
+    frame.onload = function(){ if (ready()) submitted(); };
     formCloseBtn.addEventListener('click', function(){ finish(formSubmitted); });
     modal.addEventListener('click', function(e){ if (e.target === modal) finish(formSubmitted); });
     document.addEventListener('keydown', function(e){
@@ -91,18 +83,17 @@
   if (successMsg) successMsg.addEventListener('click', function(e){ if (e.target === successMsg) successMsg.classList.remove('show'); });
 
   window.addEventListener('message', function(ev){
-    if (!modalOpen) return;
+    if (!ready()) return;
     if (ev.origin !== 'https://forms.yandex.ru' && ev.origin !== 'https://forms.yandex.net') return;
     var d = ev.data;
-    if (typeof d === 'number') return;
-    if (d && typeof d === 'object' && ('height' in d || d.type === 'resize' || d.event === 'resize')) return;
-    if (Date.now() - openedAt < 2000) return;
+    if (!d || typeof d !== 'object') return;
+    if ('height' in d || d.type === 'resize' || d.event === 'resize') return;
     submitted();
   });
 
   function openForm(){
     if (!modal || !frame) return;
-    modalOpen = true; frameLoads = 0; formSubmitted = false; autoTimer = null; openedAt = Date.now();
+    modalOpen = true; formSubmitted = false; openedAt = Date.now();
     frame.src = FORM_URL;
     modal.classList.add('open');
     modal.setAttribute('aria-hidden','false');
