@@ -10,6 +10,17 @@
   window.addEventListener('load', toTop);
   window.addEventListener('pageshow', function(e){ if (e.persisted) toTop(); });
 
+  function ensureFavicon(){
+    if (document.querySelector('link[rel="icon"]')) return;
+    var l = document.createElement('link');
+    l.rel = 'icon'; l.type = 'image/png'; l.href = 'logo.png';
+    document.head.appendChild(l);
+    var a = document.createElement('link');
+    a.rel = 'apple-touch-icon'; a.href = 'logo.png';
+    document.head.appendChild(a);
+  }
+  ensureFavicon();
+
   var FORM_URL = 'https://forms.yandex.ru/u/6ac20eb91f1eb51bc88cc4bd/';
   var GAP = 2500, LOAD_GUARD = 8000;
 
