@@ -50,69 +50,68 @@
     } else { fallback(); }
   }
 
-  // ---- окно "Заявка принята" после редиректа с анкеты (?thanks=1 или #thanks) ----
+  var modal = document.getElementById('form-modal');
+  var frame = document.getElementById('form-frame');
+  var formCloseBtn = document.getElementById('form-close');
   var successMsg = document.getElementById('success-message');
   var successCloseBtn = document.getElementById('success-close');
-  var thanksOpen = false;
 
-  function hasThanks(){
-    if (location.hash === '#thanks') return true;
-    var q = location.search.replace(/^\?/, '');
-    if (!q) return false;
-    var parts = q.split('&');
-    for (var i = 0; i < parts.length; i++){
-      if (parts[i] === 'thanks=1' || parts[i] === 'thanks') return true;
-    }
-    return false;
+  var modalOpen = false, frameLoads = 0, formSubmitted = false, autoTimer = null, openedAt = 0;
+
+  function finish(showSuccess){
+    if (autoTimer){ clearTimeout(autoTimer); autoTimer = null; }
+    modalOpen = false;
+    if (modal) modal.classList.remove('open');
+    if (modal) modal.setAttribute('aria-hidden','true');
+    if (frame) frame.removeAttribute('src');
+    document.body.style.overflow = '';
+    if (showSuccess && successMsg) successMsg.classList.add('show');
   }
-  function cleanUrl(){
-    try{
-      if (!history.replaceState) return;
-      var q = location.search.replace(/^\?/, '');
-      var parts = q ? q.split('&') : [];
-      var keep = [];
-      for (var i = 0; i < parts.length; i++){
-        if (parts[i] && parts[i].indexOf('thanks=') !== 0 && parts[i] !== 'thanks') keep.push(parts[i]);
-      }
-      var newSearch = keep.length ? ('?' + keep.join('&')) : '';
-      var newHash = (location.hash === '#thanks') ? '' : location.hash;
-      history.replaceState(null, '', location.pathname + newSearch + newHash);
-    } catch(e){}
-  }
-  function showThanks(){
-    if (!successMsg) return;
-    successMsg.classList.add('show');
-    thanksOpen = true;
-  }
-  function closeThanks(){
-    if (!successMsg) return;
-    successMsg.classList.remove('show');
-    thanksOpen = false;
-    cleanUrl();
+  function submitted(){
+    if (formSubmitted) return;
+    formSubmitted = true;
+    finish(true);
   }
 
-  if (hasThanks()){
-    setTimeout(showThanks, 150);
+  if (modal && frame && formCloseBtn){
+    frame.onload = function(){
+      if (!modalOpen) return;
+      frameLoads++;
+      if (frameLoads > 1) submitted();
+    };
+    formCloseBtn.addEventListener('click', function(){ finish(formSubmitted); });
+    modal.addEventListener('click', function(e){ if (e.target === modal) finish(formSubmitted); });
+    document.addEventListener('keydown', function(e){
+      if (e.key !== 'Escape') return;
+      if (successMsg && successMsg.classList.contains('show')){ successMsg.classList.remove('show'); return; }
+      if (modalOpen) finish(formSubmitted);
+    });
   }
-  if (successCloseBtn) successCloseBtn.addEventListener('click', closeThanks);
-  if (successMsg) successMsg.addEventListener('click', function(e){ if (e.target === successMsg) closeThanks(); });
-  document.addEventListener('mousedown', function(e){
-    if (!thanksOpen || !successMsg) return;
-    if (successMsg.contains(e.target)) return;
-    closeThanks();
-  });
-  document.addEventListener('keydown', function(e){
-    if (e.key === 'Escape' && thanksOpen) closeThanks();
+  if (successCloseBtn) successCloseBtn.addEventListener('click', function(){ successMsg.classList.remove('show'); });
+  if (successMsg) successMsg.addEventListener('click', function(e){ if (e.target === successMsg) successMsg.classList.remove('show'); });
+
+  window.addEventListener('message', function(ev){
+    if (!modalOpen) return;
+    if (ev.origin !== 'https://forms.yandex.ru' && ev.origin !== 'https://forms.yandex.net') return;
+    var d = ev.data;
+    if (typeof d === 'number') return;
+    if (d && typeof d === 'object' && ('height' in d || d.type === 'resize' || d.event === 'resize')) return;
+    if (Date.now() - openedAt < 2000) return;
+    submitted();
   });
 
-  // ---- клики: открыть анкету / скопировать контакт ----
+  function openForm(){
+    if (!modal || !frame) return;
+    modalOpen = true; frameLoads = 0; formSubmitted = false; autoTimer = null; openedAt = Date.now();
+    frame.src = FORM_URL;
+    modal.classList.add('open');
+    modal.setAttribute('aria-hidden','false');
+    document.body.style.overflow = 'hidden';
+  }
+
   document.addEventListener('click', function(e){
     var trigger = e.target.closest ? e.target.closest('[data-open-form]') : null;
-    if (trigger){
-      e.preventDefault();
-      location.href = FORM_URL;
-      return;
-    }
+    if (trigger){ e.preventDefault(); openForm(); return; }
     var btn = e.target.closest ? e.target.closest('.contact-btn') : null;
     if (!btn) return;
     var href = btn.getAttribute('href') || '';
@@ -123,9 +122,7 @@
     e.preventDefault();
     var raw = href.replace(/^tel:/,'').replace(/^mailto:/,'');
     var label = isTel ? '+7 (812) 71-646-74' : raw;
-    copyText(raw, function(ok){
-      showToast(ok ? ('Скопировано: ' + label) : ('Скопируйте вручную: ' + label));
-    });
+    copyText(raw, function(ok){ showToast(ok ? ('Скопировано: ' + label) : ('Скопируйте вручную: ' + label)); });
   });
 
   var els = document.querySelectorAll('.reveal');
@@ -135,10 +132,7 @@
   }
   var io = new IntersectionObserver(function(entries){
     entries.forEach(function(en){
-      if (en.isIntersecting) {
-        en.target.classList.add('visible');
-        io.unobserve(en.target);
-      }
+      if (en.isIntersecting) { en.target.classList.add('visible'); io.unobserve(en.target); }
     });
   }, {threshold:.15, rootMargin:'0px 0px -40px 0px'});
   for (var j = 0; j < els.length; j++) io.observe(els[j]);
