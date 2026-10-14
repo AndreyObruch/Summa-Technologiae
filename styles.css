@@ -197,4 +197,7 @@ footer .container{display:flex;flex-direction:column;align-items:center;gap:12px
   .hero-bg img,.hero-content .eyebrow,.hero-content h1,.hero-content .tagline,.hero-content .lead{animation:none;opacity:1}
   .hero-bg img{opacity:.5;-webkit-mask-image:none;mask-image:none}
   .reveal{opacity:1;transform:none;transition:none}
-}
+}/* === Фон секции "Регистрация" === */
+#register{position:relative;background:#012032 url("register-bg.jpg") center/cover no-repeat;}
+#register::before{content:"";position:absolute;inset:0;background:rgba(1,32,50,.45);pointer-events:none;}
+#register>.container{position:relative;z-index:1;}
