@@ -8,7 +8,29 @@
 <script>if('scrollRestoration' in history){history.scrollRestoration='manual';}</script>
 <title>Программа семинара — Сумма технологий</title>
 <link rel="stylesheet" href="styles.css">
-<style>.patrons-list a{color:inherit;text-decoration:none;border-bottom:1px dotted rgba(240,180,41,.55)}.patrons-list a:hover{border-bottom-style:solid;border-bottom-color:#f0b429}</style>
+<style>
+.patrons-list a{color:inherit;text-decoration:none;border-bottom:1px dotted rgba(240,180,41,.55)}.patrons-list a:hover{border-bottom-style:solid;border-bottom-color:#f0b429}
+.sched-alert{margin:34px auto 0;max-width:960px;padding:18px 26px;border:1px solid rgba(240,180,41,.65);border-radius:14px;background:linear-gradient(135deg,rgba(240,180,41,.14),rgba(45,212,234,.10));text-align:center;font-size:1.05rem;color:#e6edf7;box-shadow:0 0 24px rgba(240,180,41,.15);}
+.sched-alert b{color:var(--gold);}
+.sched-alert a{color:var(--accent);}
+.day-card{background:rgba(6,42,64,.72);border:1px solid rgba(45,212,234,.18);border-radius:18px;padding:34px 34px 26px;margin-bottom:34px;backdrop-filter:blur(4px);}
+.day-head{display:flex;flex-wrap:wrap;align-items:baseline;gap:10px 18px;margin-bottom:8px;}
+.day-head h2{margin:0;color:var(--gold);font-size:1.6rem;}
+.day-place{color:var(--accent);font-size:.98rem;}
+.day-note{color:#9fb3c8;font-size:.95rem;margin:0 0 18px;}
+.tl{margin-top:14px;}
+.tl-row{display:flex;gap:18px;padding:12px 0;border-top:1px dashed rgba(159,179,200,.25);}
+.tl-row:first-child{border-top:none;}
+.tl-time{flex:0 0 118px;color:var(--accent);font-weight:700;font-variant-numeric:tabular-nums;padding-top:2px;}
+.tl-body{flex:1;}
+.sec-name{color:var(--gold);font-weight:700;font-size:1.08rem;margin:0 0 10px;}
+.talk{margin:0 0 14px;padding-left:14px;border-left:2px solid rgba(45,212,234,.45);}
+.talk-speaker{color:var(--gold);font-weight:600;}
+.talk-title{color:#e6edf7;font-weight:700;}
+.talk-desc{color:#9fb3c8;font-size:.95rem;margin:4px 0 0;}
+.tl-break .tl-body{color:#9fb3c8;font-style:italic;}
+@media (max-width:640px){.tl-row{flex-direction:column;gap:4px}.tl-time{flex:none}}
+</style>
 </head>
 <body>
 
@@ -29,15 +51,98 @@
 
 <header class="page-hero">
   <div class="container">
-    <p class="eyebrow">Санкт-Петербург · 24–25 октября</p>
+    <p class="eyebrow">Санкт-Петербург · 24–25 октября 2026</p>
     <h1 class="page-title">Программа семинара</h1>
-    <p class="lead">Расписание докладов и секций — наполнение появится после 17:00.</p>
+    <p class="lead">Два дня, пять секций, доклады и дискуссии.</p>
   </div>
 </header>
 
 <section id="schedule">
   <div class="container">
-    <p class="section-sub reveal">Страница в работе. Полная программа по дням, секциям и спикерам будет опубликована в ближайшее время.</p>
+
+    <div class="sched-alert reveal">Следите за объявлениями в <a href="https://t.me/summa_tech_ai" target="_blank" rel="noopener">ТГ</a> и ВК — там оперативная информация. <b>Подписчикам ТГ-канала и группы в ВК — скидка 15%!</b></div>
+
+    <div class="day-card reveal">
+      <div class="day-head"><h2>День 1 · 24 октября 2026</h2><span class="day-place">Уральская ул., 1Ю</span></div>
+      <div class="tl">
+        <div class="tl-row">
+          <div class="tl-time">12:00–12:15</div>
+          <div class="tl-body">Вступительное слово от организаторов семинара.</div>
+        </div>
+        <div class="tl-row">
+          <div class="tl-time">12:15–13:30</div>
+          <div class="tl-body">
+            <p class="sec-name">Секция 1. Научно-техническая база ИИ</p>
+            <div class="talk"><span class="talk-speaker">Черняк Д.</span> <span class="talk-title">«От ИИ к ИскИнам»</span><p class="talk-desc">Действительно ли есть интеллект у ИИ? Может ли у него быть самосознание? Заменяем философские рассуждения сухими инженерными схемами минувшей пятилетки.</p></div>
+            <div class="talk"><span class="talk-speaker">Малютин Е.</span> <span class="talk-title">«Математические основы ИИ: что полезно знать пользователю»</span><p class="talk-desc">Представление знания в системах искусственного интеллекта.</p></div>
+            <div class="talk"><span class="talk-speaker">Смирнов С.</span> <span class="talk-title">«Технологические основы ИИ: почему ИИ „выстрелил“ именно сейчас?»</span></div>
+          </div>
+        </div>
+        <div class="tl-row tl-break">
+          <div class="tl-time">13:30–13:45</div>
+          <div class="tl-body">Кофе-брейк</div>
+        </div>
+        <div class="tl-row">
+          <div class="tl-time">13:45–15:00</div>
+          <div class="tl-body">
+            <p class="sec-name">Секция 2. Практика ИИ: от личного к бизнесу</p>
+            <div class="talk"><span class="talk-speaker">Алексеев А.</span> <span class="talk-title">«Есть ли жизнь без Claude?»</span><p class="talk-desc">Какой уровень ИИ сегодня доступен российскому бизнесу при отключении Claude и ChatGPT. Чаты, ассистенты, агенты, селф-хостинг и реальные прикладные задачи. Разбираемся с моделями, инструментами, возможностями и ценами.</p></div>
+            <div class="talk"><span class="talk-speaker">Докладчик на согласовании</span> <span class="talk-title">«Как использовать ИИ в личном пространстве и бизнесе»</span><p class="talk-desc">Как заработать с помощью ИИ. Как решать проблемы, стоящие на пути российского пользователя.</p></div>
+          </div>
+        </div>
+        <div class="tl-row tl-break">
+          <div class="tl-time">15:00–15:30</div>
+          <div class="tl-body">Перерыв на обед</div>
+        </div>
+        <div class="tl-row">
+          <div class="tl-time">15:30–16:30</div>
+          <div class="tl-body">
+            <p class="sec-name">Секция 3. Применение ИИ в образовании, творчестве и профессиях</p>
+            <div class="talk"><span class="talk-speaker">Поздняков С.</span> <span class="talk-title">«Концепция TITE (Technology-Immune / Technology-Enabled) в эпоху ИИ»</span><p class="talk-desc">TITE — это про задачи, которые нельзя решить «нажатием кнопки», но и без технологии не решить: граница между машинным и человеческим в образовании.</p></div>
+            <div class="talk"><span class="talk-speaker">Образцов Я.</span> <span class="talk-title">«Книжкогенератор — как уговорить ИИ поработать»</span><p class="talk-desc">Опыт создания искусственного писателя-фантаста. Выученные уроки сложного промптинга и реальные результаты.</p></div>
+          </div>
+        </div>
+        <div class="tl-row tl-break">
+          <div class="tl-time">16:30–16:45</div>
+          <div class="tl-body">Кофе-брейк</div>
+        </div>
+        <div class="tl-row">
+          <div class="tl-time">16:45–18:00</div>
+          <div class="tl-body">
+            <p class="sec-name">Секция 3 · продолжение</p>
+            <div class="talk"><span class="talk-speaker">Северова А.</span> <span class="talk-title">«Швейцарский нож с ножками»</span><p class="talk-desc">Как создание ИИ-ассистента вызвало бум креатива в нашей собственной компании. Опыт развития решений на базе платформы «ИИ-Компаньон».</p></div>
+            <div class="talk"><span class="talk-speaker">Смирнов С.</span> <span class="talk-title">«Практический опыт применения ИИ во внешкольном образовании»</span></div>
+            <div class="talk"><span class="talk-speaker">Люско И.</span> <span class="talk-title">«Применение ИИ в художественном творчестве и кино»</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="day-card reveal">
+      <div class="day-head"><h2>День 2 · 25 октября 2026</h2><span class="day-place">Адрес уточним до 22 октября — совсем рядом с метро</span></div>
+      <p class="day-note">Начало в 14:00, окончание — по мере завершения дискуссии.</p>
+      <div class="tl">
+        <div class="tl-row">
+          <div class="tl-time">14:00</div>
+          <div class="tl-body">
+            <p class="sec-name">Секция 4. Футурология, история, этика, риски</p>
+            <div class="talk"><span class="talk-speaker">Черняк Д.</span> <span class="talk-title">«Контуры будущего. Взгляд на то, чего никогда не было»</span><p class="talk-desc">ИИ — это лишь часть технологической картины и лишь малая часть когнитивной парадигмы. Каким будет человек в новом мире? Какие ценности потеряют опору, а какие войдут в силу.</p></div>
+            <div class="talk"><span class="talk-speaker">Смирнов С.</span> <span class="talk-title">«О переименовании ИИ в суперинтеллект»</span><p class="talk-desc">Смена имени — не косметика, а признание: технология переросла саму себя. ИИ перестаёт быть инструментом и становится субъектом. Для всех это значит одно — правила игры меняются, и обратного хода УЖЕ не будет.</p></div>
+            <div class="talk"><span class="talk-speaker">Смирнов С.</span> <span class="talk-title">«История развития ИИ: от Тьюринга до наших дней»</span><p class="talk-desc">От мигающих лампочек до суперинтеллекта — весь путь уместился в 70 лет. Две тысячи лет философии и семь десятилетий инженерии — и вот мы стоим на пороге того, чего сами не до конца понимаем.</p></div>
+            <div class="talk"><span class="talk-speaker">Арканов А.</span> <span class="talk-title">«О мышлении в эпоху Суперинтеллекта»</span><p class="talk-desc">Что будет с человеческим мышлением дальше?</p></div>
+            <div class="talk"><span class="talk-speaker">Тарасова О.</span> <span class="talk-title">«Замыкающая роль ИИ в процессах образования XIX–XXI веков»</span></div>
+            <div class="talk"><span class="talk-speaker">Колокольцев М.</span> <span class="talk-title">«Palantir как прообраз будущего Суперинтеллекта (SI)»</span></div>
+            <p class="talk-desc" style="margin-top:6px">Часть докладов второго дня в подготовке. Следите за обновлениями.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="day-card reveal">
+      <div class="day-head"><h2>Секция 5. Молодёжная секция</h2></div>
+      <p class="day-note" style="margin:0">Проводится параллельно с основным семинаром. Ребята обсуждают актуальные для них темы, связанные с ИИ, и выходят с вопросами к взрослым в течение всего дня.</p>
+    </div>
+
   </div>
 </section>
 
