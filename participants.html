@@ -8,7 +8,17 @@
 <script>if('scrollRestoration' in history){history.scrollRestoration='manual';}</script>
 <title>Наши участники — Сумма технологий</title>
 <link rel="stylesheet" href="styles.css">
-<style>.patrons-list a{color:inherit;text-decoration:none;border-bottom:1px dotted rgba(240,180,41,.55)}.patrons-list a:hover{border-bottom-style:solid;border-bottom-color:#f0b429}</style>
+<style>
+.patrons-list a{color:inherit;text-decoration:none;border-bottom:1px dotted rgba(240,180,41,.55)}.patrons-list a:hover{border-bottom-style:solid;border-bottom-color:#f0b429}
+.part-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(310px,1fr));gap:22px;margin-top:30px;}
+.part-card{background:rgba(6,42,64,.72);border:1px solid rgba(45,212,234,.18);border-radius:16px;padding:24px;display:flex;gap:16px;align-items:flex-start;transition:transform .25s,border-color .25s,box-shadow .25s;}
+.part-card:hover{transform:translateY(-4px);border-color:rgba(240,180,41,.5);box-shadow:0 10px 30px rgba(1,16,26,.5);}
+.part-ava{flex:0 0 54px;width:54px;height:54px;border-radius:50%;background:linear-gradient(135deg,var(--accent),var(--gold));display:flex;align-items:center;justify-content:center;font-weight:800;color:#012032;font-size:1.1rem;letter-spacing:.5px;box-shadow:0 0 18px rgba(45,212,234,.35);}
+.part-name{color:var(--gold);font-weight:700;font-size:1.12rem;margin:2px 0 6px;}
+.part-role{color:#9fb3c8;font-size:.94rem;margin:0;line-height:1.5;}
+.part-note{margin-top:26px;text-align:center;color:#9fb3c8;font-size:.95rem;}
+.part-note a{color:var(--accent);}
+</style>
 </head>
 <body>
 
@@ -29,15 +39,83 @@
 
 <header class="page-hero">
   <div class="container">
-    <p class="eyebrow">Санкт-Петербург · 24–25 октября</p>
+    <p class="eyebrow">Санкт-Петербург · 24–25 октября 2026</p>
     <h1 class="page-title">Наши участники</h1>
-    <p class="lead">Докладчики и участники семинара — наполнение появится после 17:00.</p>
+    <p class="lead">Докладчики семинара — учёные, инженеры, педагоги, предприниматели и исследователи ИИ.</p>
   </div>
 </header>
 
 <section id="participants">
   <div class="container">
-    <p class="section-sub reveal">Страница в работе. Список докладчиков и участников будет опубликован в ближайшее время.</p>
+    <div class="part-grid">
+
+      <div class="part-card reveal">
+        <div class="part-ava">МЕ</div>
+        <div><p class="part-name">Малютин Е.</p><p class="part-role">Старший преподаватель кафедры алгоритмической математики Санкт-Петербургского государственного электротехнического университета им. В. И. Ульянова (Ленина).</p></div>
+      </div>
+
+      <div class="part-card reveal">
+        <div class="part-ava">ПС</div>
+        <div><p class="part-name">Поздняков С.</p><p class="part-role">Профессор кафедры алгоритмической математики СПбГЭТУ «ЛЭТИ», главный редактор журнала «Компьютерные инструменты в образовании».</p></div>
+      </div>
+
+      <div class="part-card reveal">
+        <div class="part-ava">СС</div>
+        <div><p class="part-name">Смирнов С.</p><p class="part-role">Учредитель семинара «Траектория смысла», руководитель семинара «Сумма технологий».</p></div>
+      </div>
+
+      <div class="part-card reveal">
+        <div class="part-ava">ЧД</div>
+        <div><p class="part-name">Черняк Д.</p><p class="part-role">Директор направления социального проектирования ИнСУСС, собственник бизнеса по ИТ-консалтингу и разработке.</p></div>
+      </div>
+
+      <div class="part-card reveal">
+        <div class="part-ava">ТО</div>
+        <div><p class="part-name">Тарасова О.</p><p class="part-role">Доктор философских наук, исследователь в области философии и истории образования.</p></div>
+      </div>
+
+      <div class="part-card reveal">
+        <div class="part-ava">АА</div>
+        <div><p class="part-name">Арканов А.</p><p class="part-role">Учредитель семинара «Траектория смысла», философ.</p></div>
+      </div>
+
+      <div class="part-card reveal">
+        <div class="part-ava">АА</div>
+        <div><p class="part-name">Алексеев А.</p><p class="part-role">Директор по развитию ООО «Консалт-МИТ», руководитель проектов внедрения ИИ.</p></div>
+      </div>
+
+      <div class="part-card reveal">
+        <div class="part-ava">ЖИ</div>
+        <div><p class="part-name">Жуков И.</p><p class="part-role">Профессор математико-механического факультета СПбГУ, президент Фонда Эйлера.</p></div>
+      </div>
+
+      <div class="part-card reveal">
+        <div class="part-ava">СА</div>
+        <div><p class="part-name">Северова А.</p><p class="part-role">Продакт-менеджер кросс-функционального решения на базе ИИ «Компаньон».</p></div>
+      </div>
+
+      <div class="part-card reveal">
+        <div class="part-ava">ОЯ</div>
+        <div><p class="part-name">Образцов Я.</p><p class="part-role">Писатель, инженер и создатель популярных и игровых дополнений, автор ИИ-продукта для написания и верификации литературных произведений.</p></div>
+      </div>
+
+      <div class="part-card reveal">
+        <div class="part-ava">ПД</div>
+        <div><p class="part-name">Потапов Д.</p><p class="part-role">Разработчик ИИ-ассистента по базе текстов Переслегина С. Б.</p></div>
+      </div>
+
+      <div class="part-card reveal">
+        <div class="part-ava">ДВ</div>
+        <div><p class="part-name">Дмитриева В.</p><p class="part-role">Переводчик, индолог, магистр филологии (СПбГУ) и религиоведения (McGill, Монреаль, Канада).</p></div>
+      </div>
+
+      <div class="part-card reveal">
+        <div class="part-ava">КМ</div>
+        <div><p class="part-name">Колокольцев М.</p><p class="part-role">Исследователь архитектуры глобальных ИИ- и СИ-систем.</p></div>
+      </div>
+
+    </div>
+    <p class="part-note reveal">Список участников пополняется — следите за объявлениями в <a href="https://t.me/summa_tech_ai" target="_blank" rel="noopener">телеграм-канале</a>.</p>
   </div>
 </section>
 
