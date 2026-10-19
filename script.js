@@ -140,17 +140,3 @@
   }, {threshold:.15, rootMargin:'0px 0px -40px 0px'});
   for (var j = 0; j < els.length; j++) io.observe(els[j]);
 })();
-
-(function(){
-  var frame = document.getElementById('form-frame');
-  var box = frame ? frame.parentNode : null;
-  if (!box || document.getElementById('modal-header')) return;
-  var mh = document.createElement('div');
-  mh.id = 'modal-header';
-  mh.innerHTML = '2-х дневный семинар «Сумма технологий»<br>Санкт-Петербург, 24–25 октября 2026: <a href="https://summatech.spb.ru/" target="_blank" rel="noopener">https://summatech.spb.ru/</a>';
-  var wrap = document.createElement('div');
-  wrap.className = 'frame-wrap';
-  box.insertBefore(mh, frame);
-  box.insertBefore(wrap, frame);
-  wrap.appendChild(frame);
-})();
