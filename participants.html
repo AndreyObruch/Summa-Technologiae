@@ -10,6 +10,16 @@
 <link rel="stylesheet" href="styles.css">
 <style>
 .patrons-list a{color:inherit;text-decoration:none;border-bottom:1px dotted rgba(240,180,41,.55)}.patrons-list a:hover{border-bottom-style:solid;border-bottom-color:#f0b429}
+body{background:#012032;}
+header.page-hero::before,header.page-hero::after,#participants::before,#participants::after{display:none;}
+header.page-hero{position:relative;z-index:5;padding:12px 0 26px;text-align:center;background:linear-gradient(rgba(1,32,50,.66),rgba(1,32,50,.66)),#012032 url("participants-bg.jpg") top/cover no-repeat;border-radius:0 0 24px 24px;}
+header.page-hero .eyebrow{margin:0 0 6px;}
+header.page-hero .page-title{margin:0 0 8px;line-height:1.08;text-shadow:0 2px 26px rgba(240,180,41,.35);}
+header.page-hero .lead{margin:0 auto;line-height:1.35;text-align:center;}
+header.page-hero .eyebrow,header.page-hero .page-title,header.page-hero .lead{opacity:1;transform:none;animation:none;}
+#participants{position:relative;background:#012032 url("participants-bg.jpg") center/cover no-repeat;background-attachment:fixed;}
+#participants::before{content:'';position:absolute;inset:0;background:rgba(1,32,50,.82);z-index:0;}
+#participants > .container{position:relative;z-index:1;}
 .part-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(310px,1fr));gap:22px;margin-top:30px;}
 .part-card{background:rgba(6,42,64,.72);border:1px solid rgba(45,212,234,.18);border-radius:16px;padding:24px;display:flex;gap:16px;align-items:flex-start;transition:transform .25s,border-color .25s,box-shadow .25s;}
 .part-card:hover{transform:translateY(-4px);border-color:rgba(240,180,41,.5);box-shadow:0 10px 30px rgba(1,16,26,.5);}
@@ -18,6 +28,7 @@
 .part-role{color:#9fb3c8;font-size:.94rem;margin:0;line-height:1.5;}
 .part-note{margin-top:26px;text-align:center;color:#9fb3c8;font-size:.95rem;}
 .part-note a{color:var(--accent);}
+@media (max-width:768px){#participants{background-attachment:scroll;}}
 </style>
 </head>
 <body>
@@ -61,7 +72,7 @@
 
       <div class="part-card reveal">
         <div class="part-ava">СС</div>
-        <div><p class="part-name">Смирнов С.</p><p class="part-role">Учредитель семинара «Траектория смысла», руководитель семинара «Сумма технологий».</p></div>
+        <div><p class="part-name">Смирнов С.</p><p class="part-role">Учредитель семинара «Траектория смысла», руководитель семинара «Сумма технологии».</p></div>
       </div>
 
       <div class="part-card reveal">
